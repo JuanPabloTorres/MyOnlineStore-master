@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MyOnlineStore.ViewModel"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.RegisterPage" Visual="Material">
+
+    <ScrollView>
+        <StackLayout>
+
+            <Entry Placeholder="Name" Text="{Binding RegisterModel.Name}"></Entry>
+            <Entry Placeholder="Last Name"  Text="{Binding RegisterModel.LastName}"></Entry>
+
+            <DatePicker Date="{Binding RegisterModel.BirthDate}" ></DatePicker>
+
+            <Picker Title="Role" SelectedItem="{Binding RegisterModel.UserRole}"  >
+                <Picker.Items>
+                    <x:String>Administrator</x:String>
+                    <x:String>Regular</x:String>
+
+                </Picker.Items>
+
+            </Picker>
+            <Entry Placeholder="Email" Text="{Binding RegisterModel.Email}"></Entry>
+
+            <Entry Placeholder="Username" Text="{Binding RegisterModel.Username}"></Entry>
+
+            <Entry Placeholder="Password" Text="{Binding RegisterModel.Password}"></Entry>
+            <Entry Placeholder="Confirm Password" Text="{Binding RegisterModel.ConfirmPassword}"></Entry>
+
+            <Button Text="Next" Command="{Binding NextCommand}"></Button>
+
+
+        </StackLayout>
+
+
+    </ScrollView>
+   
+</ContentPage>

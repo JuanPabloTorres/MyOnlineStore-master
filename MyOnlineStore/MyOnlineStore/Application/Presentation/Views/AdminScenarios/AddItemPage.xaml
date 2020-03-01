@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.Administrator.AddItemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Behaviors"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{StaticResource PrimaryNavyBlue}"
+    NavigationPage.HasNavigationBar="True"
+    Routing.Route="AddProductItem"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout Orientation="Vertical">
+                <Label
+                    Margin="5"
+                    FontSize="Title"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="[Store Name]"
+                    TextColor="White" />
+                <StackLayout
+                    Padding="10"
+                    Orientation="Vertical"
+                    VerticalOptions="CenterAndExpand">
+                    <Button
+                        x:Name="pickPhoto"
+                        BackgroundColor="{StaticResource PrimaryMint}"
+                        CornerRadius="10"
+                        FontSize="Large"
+                        ImageSource="camera.png"
+                        Text="Photo">
+                        <Button.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding GetPhotoCommand}" EventName="Clicked" />
+                        </Button.Behaviors>
+                    </Button>
+                    <StackLayout x:Name="ImageList" />
+                    <Entry
+                        Placeholder="Item Name"
+                        PlaceholderColor="White"
+                        Text="{Binding NewItem.Text}"
+                        TextColor="White" />
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                            FontSize="Title"
+                            Text="Price"
+                            TextColor="White" />
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Price"
+                            PlaceholderColor="White"
+                            Text="{Binding NewItem.Price}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <Editor
+                        Placeholder="Description"
+                        PlaceholderColor="White"
+                        Text="{Binding NewItem.Description}"
+                        TextColor="White" />
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                            FontSize="Title"
+                            Text="Quantity"
+                            TextColor="White" />
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Item Quantity"
+                            PlaceholderColor="White"
+                            Text="{Binding NewItem.Quantity}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <Picker
+                        Title="Item Type"
+                        SelectedItem="{Binding NewItem.Type, Mode=TwoWay}"
+                        TitleColor="White">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Food</x:String>
+                                <x:String>Clothes</x:String>
+                                <x:String>Car Tools</x:String>
+                                <x:String>Home Tools</x:String>
+                                <x:String>Service</x:String>
+
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Button
+                        BackgroundColor="{StaticResource PrimaryMint}"
+                        Command="{Binding AddCommand}"
+                        CornerRadius="10"
+                        FontSize="Large"
+                        ImageSource="plus_circle.png"
+                        Text="Add" />
+                </StackLayout>
+                <Button
+                    Margin="5"
+                    BackgroundColor="{StaticResource PrimaryMint}"
+                    Command="{Binding DoneCommand}"
+                    CornerRadius="10"
+                    FontSize="Large"
+                    ImageSource="check.png"
+                    Text="Done" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

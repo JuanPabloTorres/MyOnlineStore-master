@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.RegisterStore"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:cardView="clr-namespace:MyOnlineStore.Application.Presentation.ViewModels.MyAccount"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:myaccountPages="clr-namespace:MyOnlineStore.Application.Presentation.Views.MyAccount"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    rainbow:DebugRainbow.IsDebug="False"
+    BackgroundColor="{StaticResource Background}"
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource InputStyle}" TargetType="{x:Type inputLayout:SfTextInputLayout}">
+                <Setter Property="Margin" Value="10,0,10,0" />
+                <Setter Property="ContainerBackgroundColor" Value="{StaticResource CardWhite}" />
+            </Style>
+            <Style BasedOn="{StaticResource BaseMaskedEdit}" TargetType="{x:Type maskedEdit:SfMaskedEdit}" />
+            <Style BasedOn="{StaticResource EntryStyle}" TargetType="{x:Type Entry}" />
+            <Style BasedOn="{StaticResource ThemePrimaryButtonLightText}" TargetType="{x:Type sfButtons:SfButton}">
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+            <Style
+                x:Key="BoldedThemePrimaryButtonMargin"
+                BasedOn="{StaticResource BoldedThemePrimaryButton}"
+                TargetType="{x:Type sfButtons:SfButton}">
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+            <Style
+                x:Key="DayLabel"
+                ApplyToDerivedTypes="True"
+                BasedOn="{StaticResource BaseLabel}"
+                CanCascade="True"
+                TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="InputLayoutHelperLabel" TargetType="{x:Type inputLayout:TextInputHelperLabel}">
+                <Setter Property="BackgroundColor" Value="Red" />
+                <Setter Property="TextColor" Value="Yellow" />
+            </Style>
+            <Style
+                x:Key="DateEntryLayout"
+                BasedOn="{StaticResource InputStyle}"
+                TargetType="{x:Type inputLayout:SfTextInputLayout}">
+                <!--<Setter Property="Margin" Value="5,0,5,0" />
+				<Setter Property="HeightRequest" Value="80" />-->
+            </Style>
+            <Style x:Key="HoursCheckBox" TargetType="{x:Type sfButtons:SfCheckBox}">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+                <Setter Property="Margin" Value="0,0,5,0" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+            <Style BasedOn="{StaticResource HorizontalSeparator}" TargetType="{x:Type BoxView}">
+                <Setter Property="HeightRequest" Value="0.01" />
+                <Setter Property="BackgroundColor" Value="Gray" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                FontAttributes="Bold"
+                FontSize="{OnPlatform Android=22,
+                                      iOS=22}"
+                HorizontalTextAlignment="Start"
+                Text="Register Store"
+                TextColor="{StaticResource CardWhite}"
+                VerticalTextAlignment="Center" />
+            <cake:PancakeView AbsoluteLayout.LayoutBounds="1,0,0.4,0.95" AbsoluteLayout.LayoutFlags="All">
+                <lottie:AnimationView
+                    Animation="moreinfo.json"
+                    AutoPlay="True"
+                    HardwareAcceleration="True"
+                    Loop="False">
+                    <lottie:AnimationView.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding MoreInfoCommand}" EventName="OnClick" />
+                    </lottie:AnimationView.Behaviors>
+                </lottie:AnimationView>
+            </cake:PancakeView>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <!--<StackLayout>
+            <Label
+                BackgroundColor="Red"
+                Text="HEREEEEEEE..."
+                />
+        </StackLayout>-->
+        <tabview:SfTabView
+            BackgroundColor="{StaticResource Background}"
+            TabHeaderBackgroundColor="{StaticResource PrimaryLight}"
+            VisibleHeaderCount="3">
+            <tabview:SfTabView.SelectionIndicatorSettings>
+                <tabview:SelectionIndicatorSettings
+                    Position="Bottom"
+                    StrokeThickness="3"
+                    Color="{StaticResource Secondary}" />
+            </tabview:SfTabView.SelectionIndicatorSettings>
+
+            <tabview:SfTabView.Items>
+                <tabview:SfTabItem Title="General Info" SelectionColor="{StaticResource Background}">
+                    <tabview:SfTabItem.Content>
+                        <ScrollView
+                            Orientation="Vertical"
+                            VerticalOptions="FillAndExpand"
+                            VerticalScrollBarVisibility="Always">
+                            <StackLayout VerticalOptions="FillAndExpand">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Aspect="AspectFill"
+                                        BackgroundColor="Silver"
+                                        HeightRequest="175"
+                                        Source="{Binding ProductImageSource, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                                    <sfButtons:SfButton
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        IsVisible="{Binding IsEditable, Converter={StaticResource BoolStringConverter}, ConverterParameter='!'}"
+                                        Text="Add Photo">
+                                        <sfButtons:SfButton.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding GetLogoPhotoCommand}" EventName="Clicked" />
+                                        </sfButtons:SfButton.Behaviors>
+                                    </sfButtons:SfButton>
+
+                                    <sfButtons:SfButton
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        IsVisible="{Binding IsEditable, Converter={StaticResource BoolStringConverter}, ConverterParameter='!'}"
+                                        Text="Take Photo">
+                                        <sfButtons:SfButton.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding TakeLogoPhotoCommand}" EventName="Clicked" />
+                                        </sfButtons:SfButton.Behaviors>
+                                    </sfButtons:SfButton>
+                                </Grid>
+
+                                <!--  Store Owner Name Entry  -->
+                                <inputLayout:SfTextInputLayout
+                                    ErrorText="{Binding StoreOwnerName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                    HasError="{Binding StoreOwnerName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                    Hint="Store's Name">
+                                    <Entry Keyboard="Text" Text="{Binding StoreOwnerName.Value, Mode=TwoWay}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding StoreOwnerName.ValidateCommand}" EventName="TextChanged" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </inputLayout:SfTextInputLayout>
+
+                                <!--  Store's Name Entry  -->
+                                <inputLayout:SfTextInputLayout
+                                    ErrorText="{Binding StoreName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                    HasError="{Binding StoreName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                    Hint="Store's Owner Name">
+                                    <Entry Keyboard="Text" Text="{Binding StoreName.Value, Mode=TwoWay}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding StoreName.ValidateCommand}" EventName="TextChanged" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </inputLayout:SfTextInputLayout>
+
+                                <!--  CATEGORY  -->
+                                <inputLayout:SfTextInputLayout
+                                    ErrorText="{Binding Category.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                    HasError="{Binding Category.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                    Hint="Category">
+                                    <Entry Keyboard="Text" Text="{Binding Category.Value, Mode=TwoWay}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding Category.ValidateCommand}" EventName="TextChanged" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </inputLayout:SfTextInputLayout>
+
+                                <!--  DESCRIPTION  -->
+                                <inputLayout:SfTextInputLayout
+                                    ErrorText="{Binding Description.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                    HasError="{Binding Description.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                    Hint="Description">
+                                    <Editor
+                                        HeightRequest="150"
+                                        Keyboard="Text"
+                                        MaxLength="100"
+                                        Text="{Binding Description.Value, Mode=TwoWay}">
+                                        <Editor.Behaviors>
+                                            <behaviors:EventToCommandBehavior Command="{Binding Category.ValidateCommand}" EventName="TextChanged" />
+                                        </Editor.Behaviors>
+                                    </Editor>
+                                </inputLayout:SfTextInputLayout>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--  LATITUDE  -->
+                                    <inputLayout:SfTextInputLayout
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        ErrorText="{Binding Latitude.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                        HasError="{Binding Latitude.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                        Hint="Latitude">
+                                        <Entry Keyboard="Numeric" Text="{Binding Latitude.Value, Mode=TwoWay}">
+                                            <Entry.Behaviors>
+                                                <behaviors:EventToCommandBehavior Command="{Binding Latitude.ValidateCommand}" EventName="TextChanged" />
+                                            </Entry.Behaviors>
+                                        </Entry>
+                                    </inputLayout:SfTextInputLayout>
+                                    <!--  LONGITUDE  -->
+                                    <inputLayout:SfTextInputLayout
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        ErrorText="{Binding Longitude.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                        HasError="{Binding Longitude.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                                        Hint="Longitude">
+                                        <Entry Keyboard="Numeric" Text="{Binding Longitude.Value, Mode=TwoWay}">
+                                            <Entry.Behaviors>
+                                                <behaviors:EventToCommandBehavior Command="{Binding Longitude.ValidateCommand}" EventName="TextChanged" />
+                                            </Entry.Behaviors>
+                                        </Entry>
+                                    </inputLayout:SfTextInputLayout>
+
+                                    <!--  GET LOCATION  -->
+                                    <sfButtons:SfButton
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        Command="{Binding GetLocationCommand}"
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource ThemePrimaryButtonLightText}"
+                                        Text="Get Current Location"
+                                        WidthRequest="200" />
+                                </Grid>
+                            </StackLayout>
+                        </ScrollView>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+                <tabview:SfTabItem Title="Working Hours" SelectionColor="{StaticResource Background}">
+                    <tabview:SfTabItem.Content>
+                        <listview:SfListView
+                            x:Name="listView"
+                            BackgroundColor="{StaticResource Background}"
+                            ItemSize="120"
+                            ItemsSource="{Binding WorkingDays}"
+                            RowSpacing="5"
+                            SelectionMode="None">
+                            <listview:SfListView.LayoutManager>
+                                <listview:LinearLayout />
+                            </listview:SfListView.LayoutManager>
+
+                            <listview:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <cake:PancakeView
+                                        Margin="0,5,0,5"
+                                        BackgroundColor="{StaticResource CardWhite}"
+                                        CornerRadius="5">
+                                        <cake:PancakeView.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding Source={x:Reference NoWorkCheckBox}, Path=IsChecked}"
+                                                TargetType="{x:Type cake:PancakeView}"
+                                                Value="True">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </DataTrigger>
+                                        </cake:PancakeView.Triggers>
+
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="3">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <BoxView Grid.Row="0" Grid.Column="0" />
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource DayLabel}"
+                                                    Text="{Binding Day.DayName}" />
+                                                <BoxView Grid.Row="0" Grid.Column="2" />
+                                            </Grid>
+                                            <inputLayout:SfTextInputLayout
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Margin="5,0,0,0"
+                                                Hint="From:"
+                                                Style="{StaticResource DateEntryLayout}">
+
+                                                <TimePicker x:Name="FromTimePicker" Time="{Binding From}">
+                                                    <TimePicker.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding Source={x:Reference NoWorkCheckBox}, Path=IsChecked}"
+                                                            TargetType="{x:Type TimePicker}"
+                                                            Value="True">
+                                                            <Setter Property="IsEnabled" Value="False" />
+                                                        </DataTrigger>
+                                                    </TimePicker.Triggers>
+                                                </TimePicker>
+                                            </inputLayout:SfTextInputLayout>
+                                            <inputLayout:SfTextInputLayout
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Hint="To:"
+                                                Style="{StaticResource DateEntryLayout}">
+                                                <TimePicker x:Name="ToTimePicker" Time="{Binding To}">
+                                                    <TimePicker.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding Source={x:Reference NoWorkCheckBox}, Path=IsChecked}"
+                                                            TargetType="{x:Type TimePicker}"
+                                                            Value="True">
+                                                            <Setter Property="IsEnabled" Value="False" />
+                                                        </DataTrigger>
+                                                    </TimePicker.Triggers>
+                                                </TimePicker>
+                                            </inputLayout:SfTextInputLayout>
+                                            <StackLayout
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                Padding="0,0,5,0">
+                                                <sfButtons:SfCheckBox
+                                                    x:Name="AllDayCheckBox"
+                                                    IsChecked="{Binding AllDay}"
+                                                    Text="All Day">
+                                                    <sfButtons:SfCheckBox.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding Source={x:Reference NoWorkCheckBox}, Path=IsChecked}"
+                                                            TargetType="{x:Type sfButtons:SfCheckBox}"
+                                                            Value="True">
+                                                            <Setter Property="IsChecked" Value="False" />
+                                                            <Setter Property="IsEnabled" Value="False" />
+                                                        </DataTrigger>
+                                                    </sfButtons:SfCheckBox.Triggers>
+                                                </sfButtons:SfCheckBox>
+                                                <sfButtons:SfCheckBox
+                                                    x:Name="NoWorkCheckBox"
+                                                    IsChecked="{Binding NoWork}"
+                                                    Text="No Work">
+                                                    <sfButtons:SfCheckBox.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding Source={x:Reference AllDayCheckBox}, Path=IsChecked}"
+                                                            TargetType="{x:Type sfButtons:SfCheckBox}"
+                                                            Value="True">
+                                                            <Setter Property="IsChecked" Value="False" />
+                                                            <Setter Property="IsEnabled" Value="False" />
+                                                        </DataTrigger>
+                                                    </sfButtons:SfCheckBox.Triggers>
+                                                </sfButtons:SfCheckBox>
+                                            </StackLayout>
+                                        </Grid>
+                                    </cake:PancakeView>
+                                </DataTemplate>
+                            </listview:SfListView.ItemTemplate>
+                        </listview:SfListView>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+                <tabview:SfTabItem Title="Card Account" SelectionColor="{StaticResource Background}">
+                    <tabview:SfTabItem.Content>
+                        <StackLayout>
+                            <cardView:CardsManagementView />
+                            <sfButtons:SfButton
+                                Margin="5,0,5,5"
+                                Command="{Binding RegisterStoreCommand}"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource BoldedThemePrimaryButtonMargin}"
+                                Text="Register Store"
+                                VerticalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+            </tabview:SfTabView.Items>
+        </tabview:SfTabView>
+
+    </ContentPage.Content>
+</ContentPage>

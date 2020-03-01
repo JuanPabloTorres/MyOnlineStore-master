@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.AdminScenarios.StoreSetting"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Store Settings"
+    Routing.Route="{StaticResource StoreSettingRoute}"
+    mc:Ignorable="d"
+    >
+    <ContentPage.Content>
+        <Grid
+            Padding="8"
+            VerticalOptions="Center"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ImageButton
+                Grid.Row="0"
+                Grid.Column="0"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="dashboardsetting.jpg"
+                />
+
+            <ImageButton
+                Grid.Row="0"
+                Grid.Column="1"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="InvetorySettings.jpg"
+                />
+
+            <ImageButton
+                Grid.Row="1"
+                Grid.Column="0"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="StoreDesignSetting.jpg"
+                />
+            <ImageButton
+                Grid.Row="1"
+                Grid.Column="1"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="storeinformation.jpg"
+                />
+
+            <ImageButton
+                Grid.Row="2"
+                Grid.Column="0"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="customerservice.jpg"
+                />
+            <ImageButton
+                Grid.Row="2"
+                Grid.Column="1"
+                Aspect="Fill"
+                CornerRadius="5"
+                Source="contentandoffers.jpg"
+                />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

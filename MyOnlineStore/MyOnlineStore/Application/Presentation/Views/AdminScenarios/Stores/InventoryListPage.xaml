@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.InventoryListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:adminViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.AdminScenarios"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:converter="clr-namespace:MyOnlineStore.Application.Presentation.PresentationHelpers.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimagesvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Padding="5,10,5,10"
+    BackgroundColor="{StaticResource CardWhite}"
+    Routing.Route="{StaticResource InventoryListPageRoute}"
+    Visual="Material"
+    mc:Ignorable="d">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior
+            Command="{Binding GoHomeCommand}"
+            IconOverride="home.png"
+            IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteArrayToImageSourceConverter x:Key="bytestoimg" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,0.8,0.8"
+                AbsoluteLayout.LayoutFlags="All"
+                FontSize="22"
+                HorizontalOptions="StartAndExpand"
+                Text="Inventory List"
+                TextColor="White"
+                VerticalOptions="End" />
+            <ImageButton
+                AbsoluteLayout.LayoutBounds="0.97,0.35,0.15,0.65"
+                AbsoluteLayout.LayoutFlags="All"
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                Source="plus.png">
+                <ImageButton.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding NavigateToNewProductItemDetailPageCommand}" EventName="Clicked" />
+                </ImageButton.Behaviors>
+            </ImageButton>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <SearchBar
+            x:Name="filterText"
+            Grid.Row="0"
+            Placeholder="Search here to filter" />
+        <listview:SfListView
+            Grid.Row="1"
+            AllowSwiping="True"
+            AutoFitMode="DynamicHeight"
+            BackgroundColor="#FEFCFF"
+            HorizontalOptions="CenterAndExpand"
+            ItemSize="200"
+            ItemsSource="{Binding InventoryItems}"
+            Orientation="Vertical"
+            SelectionBackgroundColor="Transparent"
+            SelectionMode="Single"
+            SwipeOffset="100"
+            SwipeThreshold="30"
+            VerticalOptions="CenterAndExpand">
+            <listview:SfListView.Behaviors>
+                <behaviors:EventToCommandBehavior Command="{Binding DeleteCommand}" EventName="SwipeEnded" />
+                <behaviors:EventToCommandBehavior Command="{Binding NavigateToProductItemDetailPageCommand}" EventName="SelectionChanged" />
+            </listview:SfListView.Behaviors>
+
+
+
+            <listview:SfListView.RightSwipeTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid
+                            Grid.Column="0"
+                            BackgroundColor="{StaticResource TeslaRed}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill">
+                            <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <ffimagesvg:SvgCachedImage
+                                    Aspect="AspectFit"
+                                    CacheType="Memory"
+                                    FadeAnimationForCachedImages="True"
+                                    HeightRequest="50"
+                                    HorizontalOptions="CenterAndExpand"
+                                    LoadingPriority="Highest"
+                                    Source="delete.svg"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </listview:SfListView.RightSwipeTemplate>
+
+            <listview:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="4">
+                        <Frame
+                            Padding="2"
+                            BorderColor="LightGray"
+                            CornerRadius="5"
+                            HasShadow="True">
+                            <Grid
+                                Margin="2"
+                                Padding="2"
+                                ColumnSpacing="0"
+                                RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+
+                                </Grid.RowDefinitions>
+
+
+
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    Aspect="Fill"
+                                    Source="{Binding Image, Converter={StaticResource bytestoimg}}" />
+                                <Label
+                                    Grid.Row="1"
+                                    FontSize="24"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Name}"
+                                    TextColor="#14B7F8"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Price, StringFormat='Price:{0:C}'}"
+                                    VerticalOptions="CenterAndExpand" />
+
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </listview:SfListView.ItemTemplate>
+        </listview:SfListView>
+    </Grid>
+
+</ContentPage>

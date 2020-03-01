@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.ProductItemClientCardView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:step="clr-namespace:MyOnlineStore.Application.Presentation.Views.Templates.StepperView"
+    xmlns:viewModel="clr-namespace:MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios"
+    x:Name="this"
+    rainbow:DebugRainbow.IsDebug="False"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <StackLayout>
+            <cake:PancakeView
+                Margin="5,0,5,0"
+                Padding="0"
+                BackgroundColor="{StaticResource CardWhite}"
+                BackgroundGradientAngle="45"
+                BackgroundGradientEndColor="Gray"
+                BackgroundGradientStartColor="Silver"
+                CornerRadius="5"
+                Elevation="2"
+                HasShadow="True"
+                >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35" />
+                        <RowDefinition Height="160" />
+                        <RowDefinition Height="35" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--  ITEM NAME  -->
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5,0,0,0"
+                        FontSize="18"
+                        HorizontalOptions="StartAndExpand"
+                        LineBreakMode="NoWrap"
+                        Text="{Binding Name}"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand"
+                        />
+                    <!--  CATEGORY  -->
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,5,0"
+                        FontSize="18"
+                        HorizontalOptions="EndAndExpand"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Category}"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand"
+                        />
+
+
+                    <!--  ITEM PHOTO  -->
+                    <Image
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Aspect="AspectFill"
+                        HorizontalOptions="FillAndExpand"
+                        Source="{Binding Logo,
+                                         Mode=OneTime,
+                                         Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                        VerticalOptions="FillAndExpand"
+                        />
+
+                    <AbsoluteLayout
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        >
+                        <!--  PRICE  -->
+                        <cake:PancakeView
+                            AbsoluteLayout.LayoutBounds="1,0,0.3,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            BackgroundColor="{StaticResource LightSilver}"
+                            CornerRadius="10"
+                            HorizontalOptions="CenterAndExpand"
+                            WidthRequest="60"
+                            >
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalOptions="CenterAndExpand"
+                                LineBreakMode="NoWrap"
+                                Text="{Binding Price,
+                                               StringFormat='{0:C}'}"
+                                TextColor="Black"
+                                TextType="Text"
+                                VerticalOptions="CenterAndExpand"
+                                />
+                        </cake:PancakeView>
+                        <!--  STEPPER  -->
+                        <step:StepperView
+                            AbsoluteLayout.LayoutBounds="0,0,0.4,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Counter="{Binding SelectedItemCount}"
+                            HorizontalOptions="CenterAndExpand"
+                            MinusClickCommand="{Binding Source={x:RelativeSource AncestorType={x:Type viewModel:StoreShopViewModel},
+                                                                                 AncestorLevel=1,
+                                                                                 Mode=FindAncestorBindingContext},
+                                                        Path=ShoppingManager.RemoveProductItemCommand}"
+                            ParameterConverter="{StaticResource ToProductItemPresenterConverter}"
+                            PlusClickCommand="{Binding Source={x:RelativeSource AncestorType={x:Type viewModel:StoreShopViewModel},
+                                                                                AncestorLevel=1,
+                                                                                Mode=FindAncestorBindingContext},
+                                                       Path=ShoppingManager.AddProductItemCommand}"
+                            VerticalOptions="Center"
+                            />
+                    </AbsoluteLayout>
+
+
+                    <!--  DESCRIPTION  -->
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="5,0,5,0"
+                        FontSize="14"
+                        HorizontalOptions="StartAndExpand"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Description}"
+                        TextColor="Black"
+                        VerticalOptions="StartAndExpand"
+                        />
+                    <!--<Label
+                        x:Name="lbl_Id"
+                        IsVisible="False"
+                        Text="{Binding Id, Converter={StaticResource GuidStringConverter}}"
+                        TextColor="Black" />-->
+                </Grid>
+            </cake:PancakeView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

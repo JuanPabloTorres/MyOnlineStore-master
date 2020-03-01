@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.Notification.JobsNotification"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfAvatarView="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    Shell.TabBarIsVisible="True"
+    mc:Ignorable="d">
+
+
+    <Shell.TitleView>
+
+        <Grid VerticalOptions="Center">
+
+            <Label
+                Grid.Column="0"
+                FontSize="Title"
+                HorizontalOptions="Start"
+                Text="Job Request"
+                TextColor="White"
+                VerticalOptions="Center" />
+
+            <button:SfButton
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                CornerRadius="10"
+                FontSize="30"
+                HorizontalOptions="End"
+                ImageSource="help.png"
+                ImageWidth="50"
+                ShowIcon="True"
+                TextColor="White"
+                VerticalOptions="Center" />
+
+        </Grid>
+
+
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+
+        <Grid>
+
+            <listview:SfListView
+                x:Name="listView"
+                Grid.Row="0"
+                AllowSwiping="True"
+                AutoFitMode="Height"
+                ItemsSource="{Binding JobRequestPreseters, Mode=TwoWay}"
+                SwipeOffset="100"
+                SwipeThreshold="30">
+
+
+
+
+
+                <listview:SfListView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <StackLayout
+                            Margin="0"
+                            Padding="0"
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
+
+
+                            <StackLayout
+                                Margin="5"
+                                Padding="5"
+                                HorizontalOptions="Center"
+                                Orientation="Horizontal"
+                                Spacing="5"
+                                VerticalOptions="Center">
+
+                                <sfAvatarView:SfAvatarView
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    Padding="4"
+                                    AvatarShape="Square"
+                                    ContentType="Default"
+                                    HorizontalOptions="Center"
+                                    ImageSource="job.png"
+                                    ShadowColor="Black" />
+
+                                <StackLayout Margin="10">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Start"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding SenderStoreName, StringFormat='From: {0} '}"
+                                        TextColor="Red" />
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Start"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding SenderFullName, StringFormat='{0} send job request to you.'}"
+                                        TextColor="Black" />
+                                </StackLayout>
+
+                            </StackLayout>
+
+
+                            <button:SfButton
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                Command="{Binding CompleteCommand}"
+                                FontAttributes="Bold"
+                                FontSize="25"
+                                HorizontalOptions="End"
+                                ImageSource="success.png"
+                                ShowIcon="True"
+                                TextColor="Black"
+                                VerticalOptions="Center" />
+
+
+                            <button:SfButton
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                Command="{Binding DeclineCommand}"
+                                FontAttributes="Bold"
+                                FontSize="25"
+                                HorizontalOptions="End"
+                                ImageSource="delete.png"
+                                ShowIcon="True"
+                                TextColor="Black"
+                                VerticalOptions="Center" />
+
+
+                        </StackLayout>
+
+                        <!--<AbsoluteLayout
+                            Margin="5"
+                            BackgroundColor="Blue"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill">
+
+
+
+                            <sfAvatarView:SfAvatarView
+                                AbsoluteLayout.LayoutBounds=".05,.5,.33,.33"
+                                AbsoluteLayout.LayoutFlags="All"
+                                AvatarShape="Circle"
+                                ContentType="Default"
+                                HeightRequest="100"
+                                HorizontalOptions="Start"
+                                ImageSource="job.png"
+                                ShadowColor="Black"
+                                WidthRequest="100" />
+
+                            <StackLayout AbsoluteLayout.LayoutBounds=".4,.45,.45,.25" AbsoluteLayout.LayoutFlags="All">
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding SenderStoreName, StringFormat='From: {0} '}"
+                                    TextColor="Red" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding SenderFullName, StringFormat='{0} send job request to you.'}"
+                                    TextColor="Black" />
+
+
+
+                            </StackLayout>
+
+
+                        </AbsoluteLayout>-->
+
+                        <!--<Grid
+                            Margin="5"
+                            HorizontalOptions="Fill"
+                            RowSpacing="0"
+                            VerticalOptions="Fill">
+
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70*" />
+                                <ColumnDefinition Width="70*" />
+                            </Grid.ColumnDefinitions>
+
+                            <sfAvatarView:SfAvatarView
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                AvatarShape="Circle"
+                                ContentType="Default"
+                                HeightRequest="100"
+                                HorizontalOptions="Center"
+                                ImageSource="job.png"
+                                ShadowColor="Black"
+                                WidthRequest="100" />
+
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Start"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding SenderStoreName, StringFormat='From: {0} '}"
+                                TextColor="Red" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Start"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding SenderFullName, StringFormat='{0} send job request to you.'}"
+                                TextColor="Black" />
+
+
+                        </Grid>-->
+
+
+
+
+
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+
+
+            </listview:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

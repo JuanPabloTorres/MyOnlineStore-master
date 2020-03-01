@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.Administrator.Inventory"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:MyOnlineStore.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    Title="Inventory"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AvailableColorConverter x:Key="cnvInvert" />
+            <local:TextToCheckConverter x:Key="txtcnv" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView Orientation="Vertical">
+        <StackLayout
+            Padding="5"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
+            <microcharts:ChartView
+                x:Name="InventoryChart"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
+                FlowDirection="LeftToRight"
+                IsVisible="True"
+                Visual="Material" />
+            <ListView
+                x:Name="invetoryList"
+                Margin="5,0,5,0"
+                Header=""
+                ItemTapped="OnSelectedItem"
+                ItemsSource="{Binding StoreItems}">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Gray">
+                            <!--<Label Text="Inventory Items:" TextColor="Black" FontSize="Title"></Label>-->
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                FontSize="Body"
+                                Text="Item Name"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontSize="Body"
+                                Text="Qty"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                FontSize="Body"
+                                Text="Status"
+                                TextColor="Black" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontSize="15"
+                                    Text="{Binding Text, StringFormat='{0}'}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="15"
+                                    Text="{Binding Quantity, StringFormat='{0}'}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    FontSize="15"
+                                    Text="{Binding IsAvailable, Converter={StaticResource txtcnv}}"
+                                    TextColor="{Binding IsAvailable, Converter={StaticResource cnvInvert}}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Padding="0,5,0,5" HorizontalOptions="Start">
+                <Label FontSize="Title" Text="Value Inventory $" />
+                <Label FontSize="Title" Text="Total Items:" />
+                <Label FontSize="Title" Text="Value Inventory Out $" />
+                <Label FontSize="Title" Text="Total Items Out" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

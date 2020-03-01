@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.StoreShopPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:badgesf="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:storeViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.StoresScenarios"
+    x:Name="this"
+    Routing.Route="{StaticResource StoreShopPageRoute}"
+    Shell.BackgroundColor="Transparent"
+    Shell.NavBarIsVisible="True"
+    Shell.TabBarIsVisible="False"
+    Visual="Material"
+    mc:Ignorable="d">
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,0.75,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Style="{StaticResource HeaderLabel}"
+                Text="{Binding ShoppingManager.CurrentShoppingStore.StoreName}" />
+            <Label
+                AbsoluteLayout.LayoutBounds="0.75,0,0.30,1"
+                AbsoluteLayout.LayoutFlags="All"
+                FontSize="18"
+                HorizontalOptions="End"
+                HorizontalTextAlignment="End"
+                LineBreakMode="NoWrap"
+                Text="{Binding ShoppingManager.CartTotalPrice, StringFormat='{0:C}'}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+            <badgesf:SfBadgeView
+                Padding="0"
+                AbsoluteLayout.LayoutBounds="1,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BadgeText="{Binding ShoppingManager.CartItemsQuantity, Converter={StaticResource UIntToStringConverter}, Mode=TwoWay}"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="Center"
+                WidthRequest="60">
+                <badgesf:SfBadgeView.BadgeSettings>
+                    <badgesf:BadgeSetting BadgeAlignment="Center" BadgeAnimation="Scale" />
+                </badgesf:SfBadgeView.BadgeSettings>
+                <badgesf:SfBadgeView.Content>
+                    <button:SfButton
+                        BackgroundColor="Transparent"
+                        BackgroundImage="shoppingcartwhite.png"
+                        Command="{Binding ShoppingManager.NavigateToCartCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="40" />
+                </badgesf:SfBadgeView.Content>
+            </badgesf:SfBadgeView>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <sfListView:SfListView
+            AbsoluteLayout.LayoutBounds="0,50,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional"
+            AutoFitMode="DynamicHeight"
+            IsStickyHeader="True"
+            ItemSpacing="3"
+            ItemsSource="{Binding Products, Mode=TwoWay}">
+
+            <sfListView:SfListView.HeaderTemplate>
+                <DataTemplate>
+                    <cake:PancakeView
+                        Margin="5,5,5,0"
+                        AbsoluteLayout.LayoutBounds="0,0,1,45"
+                        AbsoluteLayout.LayoutFlags="WidthProportional"
+                        BackgroundColor="{StaticResource CardWhite}"
+                        CornerRadius="5">
+                        <SearchBar
+                            x:Name="Filter"
+                            HorizontalOptions="CenterAndExpand"
+                            Keyboard="Default"
+                            MaxLength="20"
+                            Placeholder="Search..."
+                            Text="{Binding SearchText}"
+                            TextColor="{StaticResource Primary}"
+                            VerticalOptions="FillAndExpand">
+                            <SearchBar.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Filter}, Path=Text}"
+                                    EventName="TextChanged" />
+                            </SearchBar.Behaviors>
+                        </SearchBar>
+                    </cake:PancakeView>
+                </DataTemplate>
+            </sfListView:SfListView.HeaderTemplate>
+
+            <sfListView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <storeViews:ProductItemClientCardView />
+                </DataTemplate>
+            </sfListView:SfListView.ItemTemplate>
+
+        </sfListView:SfListView>
+    </ContentPage.Content>
+</ContentPage>

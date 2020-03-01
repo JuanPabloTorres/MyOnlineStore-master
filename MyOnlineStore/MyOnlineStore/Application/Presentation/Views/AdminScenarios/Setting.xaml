@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.Administrator.Setting"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+
+                <abstractions:CircleImage
+                    x:Name="storePic"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="2" />
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Clicked="OnChangePicture"
+                    CornerRadius="5"
+                    Text="Change Photo" />
+
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Store Name" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    ImageSource="edit.png"
+                    Text="Edit" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Store Direction" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    ImageSource="edit.png"
+                    Text="Edit" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Store Owner" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    ImageSource="edit.png"
+                    Text="Edit" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Start" Orientation="Horizontal">
+
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="Store Type" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    ImageSource="edit.png"
+                    Text="Edit" />
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

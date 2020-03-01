@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MyOnlineStore.Application.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:adminviews="clr-namespace:MyOnlineStore.Application.Presentation.Views.AdminScenarios"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:homeviews="clr-namespace:MyOnlineStore.Application.Presentation.Views.Home"
+    xmlns:local="clr-namespace:MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores"
+    xmlns:local1="clr-namespace:MyOnlineStore.Application.Presentation.Views.Notification"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:myaccount="clr-namespace:MyOnlineStore.Application.Presentation.Views.MyAccount"
+    xmlns:templates="clr-namespace:MyOnlineStore.Application.Presentation.Views.Templates"
+    xmlns:workspace="clr-namespace:MyOnlineStore.Application.Presentation.Views.WorkSpace"
+    Title="MyOnlineStore"
+    BackgroundColor="{StaticResource Background}"
+    FlowDirection="LeftToRight"
+    FlyoutBehavior="Flyout"
+    Style="{StaticResource BaseStyle}"
+    Visual="Material"
+    mc:Ignorable="d">
+
+    <!--  Styles and Resources  -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="BaseStyle"
+                ApplyToDerivedTypes="True"
+                TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource LightSilver}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="Shell.NavBarHasShadow" Value="True" />
+            </Style>
+            <!--<Style BasedOn="{StaticResource BaseStyle}" TargetType="ShellItem" />-->
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!--  MAKE VISIBLE IF HAS ONE OR MORE STORE AT HIS NAME  -->
+    <Shell.FlyoutHeader>
+        <templates:FlyoutHeaderContentView HeaderContentView="{Binding HeaderContent, Mode=TwoWay}" />
+    </Shell.FlyoutHeader>
+    <FlyoutItem
+        Title="Find a Stores"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="tab_feed.png">
+
+        <Tab
+            Title="My Stores"
+            Icon="tab_feed.png"
+            Route="Home">
+            <ShellContent Title="Page 1" ContentTemplate="{DataTemplate homeviews:HomePage}" />
+        </Tab>
+        <Tab Title="Explore Stores" Icon="tab_feed.png">
+            <ShellContent
+                Title="Page 3"
+                ContentTemplate="{DataTemplate homeviews:ExploreStores}"
+                Icon="paw.png" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem
+        Title="My Account"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="account.png">
+        <Tab
+            Title="My Account Settings"
+            Icon="tab_feed.png"
+            Route="Home">
+            <ShellContent Title="My Account" ContentTemplate="{DataTemplate myaccount:MyAccountSettings}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Register a Store"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="store.png">
+        <Tab>
+            <ShellContent Title="Create Store" ContentTemplate="{DataTemplate adminviews:RegisterStore}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Store Settings"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="control.png">
+        <Tab
+            Title="Administrate Store"
+            Icon="tab_feed.png"
+            Route="Home">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MyStoresPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Notification"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="notification.png">
+
+        <Tab Title="Job Notification" Icon="job.png">
+            <ShellContent ContentTemplate="{DataTemplate local1:JobsNotification}" />
+        </Tab>
+
+        <Tab Title="Rewards Notification" Icon="gift.png">
+            <ShellContent ContentTemplate="{DataTemplate local1:JobsNotification}" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Work Space"
+        FlyoutDisplayOptions="AsSingleItem"
+        Icon="employeeprofile.png">
+
+        <Tab Title="Job Notification" Icon="job.png">
+            <ShellContent ContentTemplate="{DataTemplate workspace:WorkStore}" />
+        </Tab>
+
+
+
+    </FlyoutItem>
+
+
+</Shell>
+

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.OrdersScenarios.CheckoutListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:orderViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.OrdersScenarios.Views"
+    xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    BackgroundColor="{StaticResource Secondary}"
+    Routing.Route="{StaticResource CheckoutListPageRoute}"
+    Shell.NavBarIsVisible="True"
+    Shell.TabBarIsVisible="False"
+    mc:Ignorable="d">
+
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,0.8,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Style="{StaticResource HeaderLabel}"
+                Text="{Binding ShoppingManager.CurrentShoppingStore.StoreName}" />
+        </AbsoluteLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="1">
+            <listview:SfListView
+                x:Name="listView"
+                AutoFitMode="DynamicHeight"
+                ItemSpacing="2"
+                ItemsSource="{Binding ShoppingManager.MyCart}">
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <orderViews:ProductItemCheckoutCard />
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+
+            </listview:SfListView>
+            <cake:PancakeView
+                Margin="5,0,5,5"
+                BackgroundColor="{StaticResource CardWhite}"
+                CornerRadius="5"
+                HeightRequest="125"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid ColumnSpacing="1" RowSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <combobox:SfComboBox
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        DataSource="{Binding CurrentUser.UserCards}"
+                        DisplayMemberPath="Number"
+                        Text="Choose a card">
+                        <combobox:SfComboBox.DropDownHeaderView>
+                            <Grid
+                                BackgroundColor="{StaticResource LightSilver}"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand">
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="5,0,0,0"
+                                    FontAttributes="Bold"
+                                    Text="CardHolderName"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    Text="Card Number"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </combobox:SfComboBox.DropDownHeaderView>
+                        <combobox:SfComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Padding="5,0,0,0"
+                                            Text="{Binding CardHolderName}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding Number}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </combobox:SfComboBox.ItemTemplate>
+                    </combobox:SfComboBox>
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5,0,0,0"
+                        FontAttributes="Italic"
+                        FontSize="14"
+                        HorizontalOptions="Start"
+                        HorizontalTextAlignment="Start"
+                        LineBreakMode="NoWrap"
+                        Text="Total Price of Order: "
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalOptions="Start"
+                        HorizontalTextAlignment="Start"
+                        LineBreakMode="NoWrap"
+                        Text="{Binding ShoppingManager.CartTotalPrice, StringFormat='{0:C}'}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                    <sfbutton:SfButton
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="0,0,5,0"
+                        BackgroundColor="{StaticResource AmazonOrange}"
+                        Command="{Binding PayCommand}"
+                        CornerRadius="5"
+                        HorizontalOptions="EndAndExpand"
+                        Text="Pay"
+                        VerticalOptions="Center" />
+                </Grid>
+            </cake:PancakeView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

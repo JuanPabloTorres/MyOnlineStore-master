@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.Views.StoreCardView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffsvgimage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Name="this"
+    rainbow:DebugRainbow.IsDebug="False"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <cake:PancakeView
+            BackgroundColor="{StaticResource CardWhite}"
+            CornerRadius="5"
+            HasShadow="False"
+            >
+
+            <Grid RowSpacing="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="35" />
+                </Grid.ColumnDefinitions>
+                <ffimage:CachedImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5,5,0,0"
+                    Aspect="Fill"
+                    BitmapOptimizations="True"
+                    CacheType="All"
+                    FadeAnimationForCachedImages="True"
+                    HeightRequest="95"
+                    HorizontalOptions="EndAndExpand"
+                    LoadingPlaceholder="placeholder_images.png"
+                    LoadingPriority="Highest"
+                    Source="{Binding Logo, Mode=OneTime, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="95"
+                    >
+                    <ffimage:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation />
+                    </ffimage:CachedImage.Transformations>
+                </ffimage:CachedImage>
+
+                <!--  FAVORITE  -->
+                <sfbutton:SfButton
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Command="{Binding MakeFavorite}"
+                    CommandParameter="{Binding Source={x:Reference this}, Path=BindingContext}"
+                    HeightRequest="35"
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="Start"
+                    WidthRequest="35"
+                    >
+
+                    <sfbutton:SfButton.Content>
+                        <ffsvgimage:SvgCachedImage
+                            x:Name="likeImage"
+                            Aspect="AspectFit"
+                            FadeAnimationDuration="1"
+                            FadeAnimationEnabled="True"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="true"
+                            Source="{Binding FavoriteSource}"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25"
+                            />
+                    </sfbutton:SfButton.Content>
+                </sfbutton:SfButton>
+
+                <!--  STORE NAME  -->
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HeightRequest="100"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding StoreName}"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center"
+                    />
+                <!--  DESCRIPTION  -->
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Spacing="0"
+                    >
+                    <Label
+                        FontAttributes="Italic"
+                        Text="Description:"
+                        TextColor="Black"
+                        TextDecorations="Underline"
+                        />
+                    <Label
+                        Margin="5,0,5,0"
+                        Text="{Binding Description}"
+                        TextColor="Black"
+                        />
+                </StackLayout>
+                <!--  CATEGORY  -->
+                <Grid
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    ColumnSpacing="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <rating:SfRating
+                        x:Name="rating"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5,0,0,0"
+                        EnableViewRangeSelection="True"
+                        HeightRequest="25"
+                        HorizontalOptions="StartAndExpand"
+                        ItemCount="5"
+                        ItemSize="20"
+                        VerticalOptions="EndAndExpand"
+                        />
+                    <StackLayout
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal"
+                        >
+                        <Label
+                            Margin="0"
+                            FontAttributes="Italic"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="NoWrap"
+                            Text="Category: "
+                            TextColor="Black"
+                            VerticalOptions="EndAndExpand"
+                            VerticalTextAlignment="Center"
+                            />
+                        <Label
+                            x:Name="catValueLabel"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="NoWrap"
+                            Text="{Binding Category}"
+                            TextColor="Black"
+                            VerticalOptions="EndAndExpand"
+                            VerticalTextAlignment="Center"
+                            />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </cake:PancakeView>
+
+    </ContentView.Content>
+</ContentView>

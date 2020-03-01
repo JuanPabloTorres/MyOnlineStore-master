@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.Dashboards.InventoryDashboards"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Inventory Dashboard"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView>
+
+            <Grid VerticalOptions="Fill">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Margin="2"
+                    Padding="0"
+                    CornerRadius="3"
+                    HasShadow="True">
+                    <StackLayout>
+
+                        <combobox:SfComboBox
+                            DataSource="{Binding InventoryActions}"
+                            SelectedItem="{Binding SelectedInventoryAction}"
+                            Text="Actions" />
+
+                        <numericupdown:SfNumericUpDown x:Name="numericupdown" Value="{Binding SelectedQuantity}" IsEnabled="{Binding IsCounterDisable}"/>
+                      
+                    </StackLayout>
+                </Frame>
+
+                <Button
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="#FFAD32"
+                    Command="{Binding InventoryFilterCommand}"
+                    CornerRadius="3"
+                    FontAttributes="Bold"
+                    Text="Filter"
+                    VerticalOptions="End" />
+
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2">
+
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+
+
+
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+
+                    </Grid.ColumnDefinitions>
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="#FFC46B"
+                        CornerRadius="5"
+                        HasShadow="True">
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Caption"
+                                HorizontalOptions="Center"
+                                Text="Items"
+                                TextColor="Black" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding InventoryGeneric.TotalItems}"
+                                TextColor="Black" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BackgroundColor="#FFC46B"
+                        CornerRadius="5"
+                        HasShadow="True">
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Caption"
+                                HorizontalOptions="Center"
+                                Text="Value"
+                                TextColor="Black" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding InventoryGeneric.InventoryValue, StringFormat='{0:C}'}"
+                                TextColor="Black" />
+                        </StackLayout>
+                    </Frame>
+
+
+                    <chart:SfChart
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="White"
+                        IsEnabled="True"
+                        Visual="Material">
+
+                        <chart:SfChart.Title>
+
+                            <chart:ChartTitle Text="{Binding InventoryGeneric.Title}" />
+
+                        </chart:SfChart.Title>
+
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:CategoryAxis>
+
+                                <chart:CategoryAxis.Title>
+                                    <chart:ChartAxisTitle FontAttributes="Bold" Text="{Binding XTitle}" />
+                                </chart:CategoryAxis.Title>
+                            </chart:CategoryAxis>
+                        </chart:SfChart.PrimaryAxis>
+
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis>
+                                <chart:NumericalAxis.Title>
+                                    <chart:ChartAxisTitle FontAttributes="Bold" Text="{Binding YTitle}" />
+                                </chart:NumericalAxis.Title>
+                            </chart:NumericalAxis>
+                        </chart:SfChart.SecondaryAxis>
+                        <chart:ColumnSeries
+                            EnableTooltip="True"
+                            ItemsSource="{Binding InventoryData, Mode=TwoWay}"
+                            XBindingPath="{Binding Inventory_XData}"
+                            YBindingPath="{Binding Inventory_YData}" />
+                    </chart:SfChart>
+
+                </Grid>
+
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

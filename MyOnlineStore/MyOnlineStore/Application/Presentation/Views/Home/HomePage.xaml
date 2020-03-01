@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.Home.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:storesViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.StoresScenarios.Views"
+    xmlns:viewModel="clr-namespace:MyOnlineStore.Application.Presentation.ViewModels.Home"
+    rainbow:DebugRainbow.IsDebug="False"
+    x:DataType="viewModel:HomeViewModel"
+    BackgroundColor="{StaticResource Background}"
+    Routing.Route="{StaticResource HomePageRoute}"
+    Shell.BackgroundColor="Transparent"
+    Visual="Material"
+    mc:Ignorable="d">
+
+
+    <Shell.TitleView>
+        <Label
+            FontSize="22"
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Start"
+            Text="My Stores"
+            TextColor="{StaticResource TextColor}"
+            VerticalTextAlignment="Center" />
+    </Shell.TitleView>
+
+
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <storesViews:StoresCollectionView StoreList="{Binding FavoriteStores}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

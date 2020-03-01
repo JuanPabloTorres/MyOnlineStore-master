@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.Views.Templates.Badges.BadgeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="this"
+    Margin="0"
+    Padding="0"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <Grid
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="CenterAndExpand"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Aspect="AspectFit"
+                Source="shopping_cart"
+                />
+
+            <cake:PancakeView
+                Grid.Row="0"
+                Grid.Column="{Binding Source={x:Reference this},
+                                      Path=StartingColumn,
+                                      Mode=TwoWay}"
+                Grid.ColumnSpan="{Binding Source={x:Reference this},
+                                          Path=CounterSize}"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="{Binding Source={x:Reference this},
+                                          Path=BadgeColor}"
+                CornerRadius="10"
+                IsVisible="{Binding Source={x:Reference this},
+                                    Path=HasCounter}"
+                >
+                <Label
+                    Margin="0"
+                    Padding="0"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Source={x:Reference this},
+                                   Path=CounterText}"
+                    TextColor="{Binding Source={x:Reference this},
+                                        Path=TextColor}"
+                    VerticalTextAlignment="Center"
+                    />
+            </cake:PancakeView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

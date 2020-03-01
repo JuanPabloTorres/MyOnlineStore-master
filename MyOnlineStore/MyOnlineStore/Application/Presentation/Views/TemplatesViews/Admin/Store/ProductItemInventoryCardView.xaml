@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.ProductItemInventoryCardView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <cake:PancakeView
+            Margin="0"
+            rainbow:DebugRainbow.IsDebug="False"
+            BackgroundColor="{StaticResource White}"
+            BorderColor="Silver"
+            BorderThickness="1"
+            CornerRadius="5"
+            HasShadow="False"
+            HeightRequest="200"
+            >
+            <RelativeLayout>
+
+                <!--  ITEM IMAGE  -->
+
+                <cake:PancakeView
+                    CornerRadius="5"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.6}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.45}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.01}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.03}"
+                    >
+                    <Image Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                </cake:PancakeView>
+
+
+                <!--  ITEM NAME  -->
+
+                <Label
+                    FontSize="18"
+                    HorizontalTextAlignment="Center"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.3}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.45}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.47}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.03}"
+                    Text="{Binding Name}"
+                    VerticalTextAlignment="Center"
+                    />
+
+                <!--  DESCRIPTION LABEL  -->
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.07}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.45}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.47}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.35}"
+                    Text="Description:"
+                    />
+
+
+                <!--  DESCRIPTION  -->
+
+                <Label
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    LineBreakMode="WordWrap"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.45}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.52}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.47}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.43}"
+                    Text="{Binding Description}"
+                    TextType="Text"
+                    VerticalTextAlignment="Start"
+                    />
+
+
+                <!--  TYPE LABEL  -->
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.68}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.90}"
+                    Text="Category:"
+                    />
+
+
+                <!--  TYPE  -->
+
+                <Label
+                    FontAttributes="Italic"
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.85}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.90}"
+                    Text="{Binding Category}"
+                    TextColor="Black"
+                    />
+
+
+                <!--  QTY LABEL  -->
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.05}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.8}"
+                    Text="Quantity: "
+                    />
+
+
+                <!--  QAUNTITY  -->
+
+                <Label
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.22}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.8}"
+                    Text="{Binding Quantity}"
+                    TextColor="Black"
+                    />
+
+
+                <!--  PRICE LABEL  -->
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.05}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.65}"
+                    Text="Price: "
+                    />
+
+
+                <!--  PRICE  -->
+
+                <Label
+                    FontSize="14"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Property=Height,
+                                                                           Type=RelativeToParent,
+                                                                           Factor=0.15}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Property=Width,
+                                                                          Type=RelativeToParent,
+                                                                          Factor=0.25}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Property=Width,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.22}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Property=Height,
+                                                                      Type=RelativeToParent,
+                                                                      Factor=0.65}"
+                    Text="{Binding Quantity}"
+                    TextColor="Black"
+                    />
+            </RelativeLayout>
+        </cake:PancakeView>
+    </ContentView.Content>
+</ContentView>

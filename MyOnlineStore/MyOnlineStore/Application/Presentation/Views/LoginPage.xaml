@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MyOnlineStore.ViewModel"
+             xmlns:local="clr-namespace:MyOnlineStore.CustomControls"
+             x:Class="MyOnlineStore.View.LoginPage" 
+            xmlns:pan="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+            xmlns:rainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows" 
+             NavigationPage.HasNavigationBar="{StaticResource NotBar}" 
+             Visual="Material" rainbows:DebugRainbow.IsDebug="False">
+
+
+    <local:GradientContentPage 
+            StartColor="{StaticResource PrimaryNavyBlue}"
+            EndColor="{StaticResource PrimaryNavyBlueLight}" 
+            Padding="0,10,0,20" >
+
+        <Label Text="Welcome" 
+               HorizontalOptions="CenterAndExpand"
+               FontSize="Title" 
+               TextColor="{StaticResource TextColor}" 
+               VerticalOptions="StartAndExpand" ></Label>
+        <StackLayout VerticalOptions="CenterAndExpand">
+
+            <Label Text="Sign In" 
+                   TextColor="{StaticResource TextColor}"
+                   HorizontalOptions="Start" 
+                   Margin="10"  
+                   FontSize="Title"></Label>
+
+            <StackLayout Padding="30" Spacing="10">
+                <local:ImageEntry Placeholder="Username"  
+                              Text="{Binding  UserLogin.Username }" 
+                              PlaceholderColor="{StaticResource TextColor}" 
+                              TextColor="{StaticResource TextColor}" 
+                              Image="user"
+                              HorizontalOptions="FillAndExpand">
+
+                </local:ImageEntry>
+            </StackLayout>
+
+            <StackLayout Padding="30" Spacing="10">
+                <local:ImageEntry Placeholder="Password" 
+                                  Text="{Binding UserLogin.Password}" 
+                                  PlaceholderColor="{StaticResource TextColor}"
+                                  TextColor="{StaticResource TextColor}"                                  
+                                  IsPassword="True"
+                                  Image="password">
+
+                </local:ImageEntry>
+            </StackLayout>
+
+            <Label HorizontalOptions="End"
+               TextColor="{StaticResource TextColor}"
+               FontSize="20"
+               Text="Forgot Password?" Margin="10">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"  >
+
+            <Button Text="Login" 
+                    CornerRadius="15"
+                    BackgroundColor="{StaticResource PrimaryMint}"
+                    Command="{Binding CommandGo}"   
+                    WidthRequest="100" 
+                    HorizontalOptions="CenterAndExpand" ></Button>
+            <Button Text="Register"
+                    CornerRadius="15" 
+                    BackgroundColor="{StaticResource PrimaryMint}"
+                    Command="{Binding CommandGoRegister}"
+                    WidthRequest="100"  
+                    HorizontalOptions="CenterAndExpand" ></Button>
+        </StackLayout>
+    </local:GradientContentPage>
+</ContentPage>

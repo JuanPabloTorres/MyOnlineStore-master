@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.Dashboards.DashboardMenu"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <button:SfButton
+                Grid.Row="0"
+                BackgroundImage="inventoryanalityc.jpg"
+                Clicked="GoInventory"
+                FontSize="30"
+                HasShadow="True"
+                HorizontalTextAlignment="End"
+                ShowIcon="True"
+                Text="Inventory"
+                TextColor="Black"
+                VerticalTextAlignment="End" />
+            <button:SfButton
+                Grid.Row="1"
+                BackgroundImage="businessgoals.jpg"
+                Clicked="GoGoals"
+                FontSize="30"
+                HasShadow="True"
+                HorizontalTextAlignment="End"
+                ShowIcon="True"
+                Text="Goals"
+                TextColor="Black"
+                VerticalTextAlignment="End" />
+            <button:SfButton
+                Grid.Row="2"
+                BackgroundImage="ordersanalityc.png"
+                Clicked="GoGoals"
+                FontSize="30"
+                HasShadow="True"
+                HorizontalTextAlignment="End"
+                ShowIcon="True"
+                Text="Orders"
+                TextColor="Black"
+                VerticalTextAlignment="End" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.ViewModels.AdminScenarios.Pages.RegistrationGeneralInfoView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <ScrollView
+            Orientation="Vertical"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always">
+            <StackLayout VerticalOptions="FillAndExpand">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Aspect="AspectFill"
+                        BackgroundColor="Silver"
+                        HeightRequest="175"
+                        Source="{Binding ProductImageSource, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                    <button:SfButton
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        IsVisible="{Binding IsEditable, Converter={StaticResource BoolStringConverter}, ConverterParameter='!'}"
+                        Text="Add Photo">
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding GetLogoPhotoCommand}" EventName="Clicked" />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+
+                    <button:SfButton
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        IsVisible="{Binding IsEditable, Converter={StaticResource BoolStringConverter}, ConverterParameter='!'}"
+                        Text="Take Photo">
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding TakeLogoPhotoCommand}" EventName="Clicked" />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+                </Grid>
+
+                <!--  Store Owner Name Entry  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding StoreOwnerName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding StoreOwnerName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Store's Name">
+                    <Entry Keyboard="Text" Text="{Binding StoreOwnerName.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding StoreOwnerName.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  Store's Name Entry  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding StoreName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding StoreName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Store's Owner Name">
+                    <Entry Keyboard="Text" Text="{Binding StoreName.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding StoreName.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  CATEGORY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Category.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding Category.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Category">
+                    <Entry Keyboard="Text" Text="{Binding Category.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding Category.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <inputLayout:SfTextInputLayout
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        ErrorText="{Binding Longitude.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        HasError="{Binding Longitude.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                        Hint="Longitude">
+                        <Entry Keyboard="Numeric" Text="{Binding Longitude.Value, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior Command="{Binding Longitude.ValidateCommand}" EventName="TextChanged" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        ErrorText="{Binding Latitude.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        HasError="{Binding Latitude.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                        Hint="Latitude">
+                        <Entry Keyboard="Numeric" Text="{Binding Latitude.Value, Mode=TwoWay}">
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior Command="{Binding Latitude.ValidateCommand}" EventName="TextChanged" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </inputLayout:SfTextInputLayout>
+                    <button:SfButton
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource ThemePrimaryButtonLightText}"
+                        Text="Get Current Location"
+                        WidthRequest="200">
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding GetLocationCommand}" EventName="Clicked" />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+                </Grid>
+
+                <!--  BUTTONS  -->
+                <FlexLayout Margin="0,0,0,10">
+                    <button:SfButton
+                        FlexLayout.Grow="1"
+                        Style="{StaticResource BoldedThemePrimaryButtonMargin}"
+                        Text="Register Store">
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding RegisterStoreCommand}" EventName="Clicked" />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+                    <button:SfButton
+                        FlexLayout.Grow="1"
+                        Style="{StaticResource BoldedThemePrimaryButtonMargin}"
+                        Text="Add Products">
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding NavigateToAddProductItemCommand}" EventName="Clicked" />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+                </FlexLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

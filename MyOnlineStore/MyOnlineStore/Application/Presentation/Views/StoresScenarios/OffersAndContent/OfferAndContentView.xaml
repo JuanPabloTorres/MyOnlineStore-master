@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.OffersAndContent.OfferAndContentView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:badgesf="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:local="clr-namespace:MyOnlineStore.Application.Presentation.MyDataTemplates"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:step="clr-namespace:MyOnlineStore.Application.Presentation.Views.Templates.StepperView"
+    Title="Store Product Offers"
+    Routing.Route="{StaticResource OfferAndContentViewRoute}"
+    mc:Ignorable="d">
+
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,0.75,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Style="{StaticResource HeaderLabel}"
+                Text="{Binding ShoppingManager.CurrentShoppingStore.StoreName}" />
+            <Label
+                AbsoluteLayout.LayoutBounds="0.75,0,0.30,1"
+                AbsoluteLayout.LayoutFlags="All"
+                FontSize="18"
+                HorizontalOptions="End"
+                HorizontalTextAlignment="End"
+                LineBreakMode="NoWrap"
+                Text="{Binding ShoppingManager.CartTotalPrice, StringFormat='{0:C}'}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+            <badgesf:SfBadgeView
+                Padding="0"
+                AbsoluteLayout.LayoutBounds="1,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BadgeText="{Binding ShoppingManager.CartItemsQuantity, Converter={StaticResource UIntToStringConverter}, Mode=TwoWay}"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="Center"
+                WidthRequest="60">
+                <badgesf:SfBadgeView.BadgeSettings>
+                    <badgesf:BadgeSetting BadgeAlignment="Center" BadgeAnimation="Scale" />
+                </badgesf:SfBadgeView.BadgeSettings>
+                <badgesf:SfBadgeView.Content>
+                    <button:SfButton
+                        BackgroundColor="Transparent"
+                        BackgroundImage="shoppingcartwhite.png"
+                        Command="{Binding ShoppingManager.NavigateToCartCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="40" />
+                </badgesf:SfBadgeView.Content>
+            </badgesf:SfBadgeView>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Content">
+                <ViewCell>
+                    <StackLayout>
+                        <pancakeview:PancakeView
+                            Margin="3"
+                            BackgroundColor="Transparent"
+                            BorderColor="Gray"
+                            BorderThickness="0.5"
+                            CornerRadius="5">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Title}" />
+                                <Grid
+                                    Margin="1"
+                                    Padding="2"
+                                    ColumnSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="2"
+                                        Aspect="Fill"
+                                        HeightRequest="120"
+                                        Source="{Binding Image, Converter={StaticResource bytestoimg}}"
+                                        WidthRequest="200" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Start, StringFormat='Start Date:{0:MM/dd/yy}'}"
+                                        TextColor="Black" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="2"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding End, StringFormat='End Date:{0:MM/dd/yy}'}"
+                                        TextColor="Black" />
+
+
+                                </Grid>
+                            </StackLayout>
+                        </pancakeview:PancakeView>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="Offer">
+                <ViewCell>
+                    <pancakeview:PancakeView
+                        Margin="3"
+                        BackgroundColor="Transparent"
+                        BorderColor="Gray"
+                        BorderThickness="0.5"
+                        CornerRadius="5">
+                        <StackLayout Padding="10">
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="Center"
+                                Text="{Binding Title}"
+                                TextColor="Black" />
+                            <Grid
+                                Margin="1"
+                                Padding="2"
+                                ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--<Image
+                                            Grid.Row="0"
+                                            Grid.ColumnSpan="2"
+                                            Aspect="Fill"
+                                            HeightRequest="120"
+                                            Source="{Binding Image, Converter={StaticResource bytestoimg}}"
+                                            WidthRequest="200" />-->
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding StartDate, StringFormat='Offer Start Date:{0:MM/dd/yy}'}"
+                                    TextColor="Black" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding EndDate, StringFormat='Offer End Date:{0:MM/dd/yy}'}"
+                                    TextColor="Black" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding BuyOne, StringFormat='Offer New Price:{0:C}'}"
+                                    TextColor="Black" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding Description, StringFormat='Description:{0}'}"
+                                    TextColor="Black" />
+
+
+
+                            </Grid>
+                        </StackLayout>
+                    </pancakeview:PancakeView>
+                </ViewCell>
+            </DataTemplate>
+            <local:OfferContentDataTemplateSelector
+                x:Key="OfferContentTemplateSelector"
+                ContentTempate="{StaticResource Content}"
+                OfferTemplate="{StaticResource Offer}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <listview:SfListView AutoFitMode="DynamicHeight" ItemsSource="{Binding ProductOfferPresenters}">
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <ViewCell>
+                            <Frame
+                                Margin="4"
+                                BorderColor="Gray"
+                                CornerRadius="2"
+                                HasShadow="True">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="2"
+                                        Padding="0"
+                                        BorderColor="Gray"
+                                        CornerRadius="5"
+                                        HasShadow="True"
+                                        IsClippedToBounds="True">
+                                        <AbsoluteLayout>
+                                            <Image
+                                                AbsoluteLayout.LayoutBounds="0,0,1,270"
+                                                AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+                                                Aspect="AspectFit"
+                                                HeightRequest="80"
+                                                Source="shoppingcart.svg"
+                                                WidthRequest="80" />
+
+                                            <Label
+                                                AbsoluteLayout.LayoutBounds="240,0,130,30"
+                                                AbsoluteLayout.LayoutFlags="None"
+                                                BackgroundColor="Red"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding Percent, StringFormat='{0}% Off'}"
+                                                TextColor="#E9EEF2"
+                                                VerticalTextAlignment="Center" />
+                                        </AbsoluteLayout>
+
+                                    </Frame>
+
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        FontSize="Title"
+                                        Text="{Binding BuyOne, StringFormat='{0:C}'}" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        FontSize="Title"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Product.Name}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        FontSize="Title"
+                                        Text="{Binding TotalPrice, StringFormat='{0:C}'}"
+                                        TextDecorations="Strikethrough" />
+
+
+                                    <Label
+                                        Grid.Row="3"
+                                        Grid.ColumnSpan="2"
+                                        FontSize="24"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Title}" />
+
+                                    <Label
+                                        Grid.Row="4"
+                                        Grid.ColumnSpan="2"
+                                        FontSize="20"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Description}" />
+                                    <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
+
+                                        <numericupdown:SfNumericUpDown
+                                            FontSize="20"
+                                            MaximumDecimalDigits="0"
+                                            SpinButtonAlignment="Both"
+                                            TextAlignment="Center"
+                                            TextColor="Gray"
+                                            Value="{Binding Quantity}" />
+
+                                        <!--<step:StepperView
+                            AbsoluteLayout.LayoutBounds="0,0,0.4,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Counter="{Binding Quantity}"
+                            HorizontalOptions="CenterAndExpand"
+                            MinusClickCommand="{Binding ShoppingManager.RemoveProductItemCommand}"
+
+                            PlusClickCommand="{Binding ShoppingManager.AddProductItemCommand}"
+                            VerticalOptions="Center"
+                            />-->
+                                    </StackLayout>
+                                    <button:SfButton
+                                        Grid.Row="6"
+                                        Grid.ColumnSpan="2"
+                                        BackgroundColor="White"
+                                        BorderColor="Black"
+                                        BorderWidth="0.2"
+                                        Command="{Binding AddToCartCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="4"
+                                        FontSize="25"
+                                        HasShadow="True"
+                                        HorizontalOptions="FillAndExpand"
+                                        ImageSource="shoppingcart.svg"
+                                        ImageWidth="35"
+                                        ShowIcon="True"
+                                        Text="Add To Cart"
+                                        TextColor="Gray"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
+
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </listview:SfListView.ItemTemplate>
+
+            </listview:SfListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

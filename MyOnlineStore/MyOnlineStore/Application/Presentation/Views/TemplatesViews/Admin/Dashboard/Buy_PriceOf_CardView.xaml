@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.AdminScenarios.Buy_PriceOf_CardView">
+  <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <Frame CornerRadius="5" HasShadow="True"  Grid.Row="0" Grid.Column="0"  >
+                <StackLayout >
+                    <Label Text="Order Start Date" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                    <DatePicker Date="{Binding  AOffer.OfferStartDate,Mode=TwoWay}"   Visual="Material"  FontSize="Title"></DatePicker>
+
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" HasShadow="True"   Grid.Row="0" Grid.Column="1" >
+
+                <StackLayout >
+
+                    <Label Text="Order End Date" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                    <DatePicker Date="{Binding AOffer.OfferEndDate,Mode=TwoWay}"    FontSize="Title" ></DatePicker>
+                </StackLayout>
+            </Frame>
+
+            <Frame  Grid.Row="1" Grid.Column="0" HasShadow="True" CornerRadius="5">
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Buy" HorizontalOptions="Center" FontSize="Caption"></Label>
+                    <Entry Placeholder="#" HorizontalOptions="Fill"  Text="{Binding AOffer.ToBuy}"></Entry>
+                </StackLayout>
+
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="1" HasShadow="True" CornerRadius="5">
+
+                <StackLayout Orientation="Vertical" >
+                    <Label Text="Price Of" HorizontalOptions="Center" FontSize="Caption"></Label>
+                    <Entry Placeholder="#" HorizontalOptions="Fill" Text="{Binding AOffer.PriceOf}"></Entry>
+                </StackLayout>
+
+            </Frame>
+
+           
+        </Grid>
+    </ContentView.Content>
+</ContentView>

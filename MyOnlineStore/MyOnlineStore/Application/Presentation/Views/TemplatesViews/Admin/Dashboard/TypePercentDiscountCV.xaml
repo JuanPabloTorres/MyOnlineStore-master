@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Views.AdminScenarios.TypePercentDiscountCV"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="0"
+                CornerRadius="5"
+                HasShadow="True">
+                <StackLayout Margin="0" Padding="0">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        Text="Order Start Date"
+                        TextColor="Black" />
+                    <DatePicker
+                        Margin="0"
+                        Date="{Binding AOffer.OfferStartDate, Mode=TwoWay}"
+                        FontSize="Title" />
+
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="1"
+                CornerRadius="5"
+                HasShadow="True">
+
+                <StackLayout Margin="0" Padding="0">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        Text="Order End Date"
+                        TextColor="Black" />
+                    <DatePicker
+                        Margin="0"
+                        Date="{Binding AOffer.OfferEndDate, Mode=TwoWay}"
+                        FontSize="Title" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Padding="0"
+                CornerRadius="5"
+                HasShadow="True">
+
+                <StackLayout
+                    Margin="0"
+                    Padding="0"
+                    Orientation="Vertical">
+                    <Label
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Text="{Binding Source={x:Reference sli}, Path=Value, StringFormat=' {0}%'}"
+                        VerticalOptions="CenterAndExpand" />
+                    <Slider
+                        x:Name="sli"
+                        Maximum="100"
+                        MaximumTrackColor="Black"
+                        Minimum="0"
+                        ThumbColor="Black"
+                        Value="{Binding AOffer.PercentDiscount}" />
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

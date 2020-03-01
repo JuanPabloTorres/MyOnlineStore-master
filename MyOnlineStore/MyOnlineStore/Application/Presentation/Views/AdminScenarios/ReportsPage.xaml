@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.Administrator.ReportsPage" Title="Report" >
+    <ContentPage.Content>
+
+            
+        <StackLayout Orientation="Vertical">
+
+            <StackLayout Orientation="Vertical">
+                
+        <Label Text="Total Sale By Day"  FontSize="Title" HorizontalOptions="CenterAndExpand"></Label>
+        <ScrollView Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal">
+
+                        <microcharts:ChartView x:Name="chartView"  FlowDirection="LeftToRight" Touch="ChartView_Touch" EnableTouchEvents="True"  HeightRequest="200" BackgroundColor="Transparent" Visual="Material" WidthRequest="500" HorizontalOptions="Start" />
+
+
+              
+                    </StackLayout>
+        </ScrollView>
+                
+                
+            </StackLayout>
+         
+            <StackLayout Orientation="Vertical">
+
+                <Label Text="Total Spend" FontSize="Title"></Label>
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+
+                        <microcharts:ChartView x:Name="TotalSpendChart"  FlowDirection="LeftToRight" HeightRequest="200" BackgroundColor="Transparent" Visual="Material" WidthRequest="500"/>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+        </StackLayout>
+      
+    </ContentPage.Content>
+</ContentPage>

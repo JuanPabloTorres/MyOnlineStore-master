@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.TemplatesViews.Popups.HelpContentPopUp"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:pcv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:popanimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    mc:Ignorable="d">
+
+
+
+    <pages:PopupPage.Animation>
+        <popanimations:ScaleAnimation
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8" />
+    </pages:PopupPage.Animation>
+
+
+    <Grid
+        Margin="6"
+        BackgroundColor="White"
+        HorizontalOptions="Center"
+        VerticalOptions="Fill">
+
+
+
+        <Label
+            Grid.Row="0"
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="Welcome To Content Page" />
+
+        <Label
+            Grid.Row="1"
+            Margin="4"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+             LineBreakMode="WordWrap"
+            Text="You will be able to add content that will be displayed on the main page, where you can add, remove and update the content." />
+
+        <Label
+            Grid.Row="2"
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="Instructions:" />
+
+
+        <Label
+            Grid.Row="3"
+            Margin="2"
+            HorizontalOptions="Start"
+            Text="1.To remove slide to the right."
+            TextColor="Black" />
+        <Label
+            Grid.Row="4"
+            Margin="2"
+            HorizontalOptions="Start"
+            Text="2.To Update slide to the left."
+            TextColor="Black" />
+        <Label
+            Grid.Row="5"
+            Margin="2"
+            HorizontalOptions="Start"
+            Text="3.To display position slide up and down then click Save."
+            TextColor="Black" />
+
+        <Label
+            Grid.Row="6"
+            Margin="2"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            Text="About:" />
+        <Label
+            Grid.Row="7"
+            Margin="2"
+            HorizontalOptions="Start"
+            Text="This content will be presented on the main page of the store."
+            TextColor="Black" />
+
+
+        <button:SfButton
+            Grid.Row="8"
+            BackgroundColor="#64C7FF"
+            Clicked="Button_Clicked"
+            FontSize="30"
+            HasShadow="True"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Text="OK"
+            TextColor="Black"
+            VerticalTextAlignment="Center" />
+
+
+
+
+    </Grid>
+
+
+</pages:PopupPage>

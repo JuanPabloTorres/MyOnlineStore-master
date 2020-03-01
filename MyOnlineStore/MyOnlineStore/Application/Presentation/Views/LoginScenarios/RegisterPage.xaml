@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.LoginScenarios.RegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    rainbow:DebugRainbow.IsDebug="False"
+    NavigationPage.HasNavigationBar="False"
+    Routing.Route="{StaticResource RegisterPageRoute}"
+    Visual="Material"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource EntryStyle}" TargetType="{x:Type Entry}" />
+            <Style BasedOn="{StaticResource InputStyle}" TargetType="{x:Type inputLayout:SfTextInputLayout}" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10,0,10,0" BackgroundColor="{StaticResource Background}">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Registration"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <!--  FULL NAME ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding FullName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding FullName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Full Name">
+                    <Entry Keyboard="Text" Text="{Binding FullName.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding FullName.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  EMAIL ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding Email.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Email">
+                    <Entry Keyboard="Text" Text="{Binding Email.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding Email.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  BIRTHDATE ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding Email.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    HelperText="Day/Month/Year"
+                    Hint="Birthday">
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="00/00/0000"
+                        Value="{Binding BirthDate.Value, Mode=TwoWay, Converter={StaticResource StringToFullDateConverter}}">
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding BirthDate.ValidateCommand}" EventName="ValueChanged" />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  PHONE NUMBER  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding PhoneNumber.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding PhoneNumber.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Phone Number">
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="000-000-0000"
+                        Value="{Binding PhoneNumber.Value, Mode=TwoWay}">
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding PhoneNumber.ValidateCommand}" EventName="ValueChanged" />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  PASSWORD ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    AbsoluteLayout.LayoutBounds="0,1,1,0.5"
+                    AbsoluteLayout.LayoutFlags="All"
+                    CharMaxLength="16"
+                    EnablePasswordVisibilityToggle="True"
+                    ErrorText="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding Password.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Password"
+                    ShowCharCount="True">
+                    <Entry
+                        IsPassword="True"
+                        Keyboard="Text"
+                        Text="{Binding Password.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding Password.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  CONFIRM PASSWORD ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    AbsoluteLayout.LayoutBounds="0,1,1,0.5"
+                    AbsoluteLayout.LayoutFlags="All"
+                    CharMaxLength="16"
+                    EnablePasswordVisibilityToggle="True"
+                    ErrorText="{Binding ConfirmPassword.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding ConfirmPassword.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Confirm Password"
+                    ShowCharCount="True">
+                    <Entry
+                        IsPassword="True"
+                        Keyboard="Text"
+                        Text="{Binding ConfirmPassword.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding ConfirmPassword.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  REGISTER BUTTON  -->
+                <button:SfButton
+                    Margin="15,0,15,0"
+                    Command="{Binding RegisterCommand}"
+                    Style="{StaticResource BoldedThemePrimaryButton}"
+                    Text="Register" />
+
+                <!--  TO LOGIN BUTTON  -->
+                <button:SfButton
+                    Command="{Binding ToLoginCommand}"
+                    Style="{StaticResource LittleTransparentButton}"
+                    Text="Have an Account" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

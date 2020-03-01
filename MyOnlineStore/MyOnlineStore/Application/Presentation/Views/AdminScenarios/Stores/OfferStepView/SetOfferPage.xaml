@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.OfferStepView.SetOfferPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+
+            <inputLayout:SfTextInputLayout
+                Grid.Row="0"
+                Padding="4,0,4,0"
+                ContainerBackgroundColor="White"
+                ContainerType="Outlined"
+                ErrorColor="#F6522E"
+                ErrorText="{Binding BuyQuantityErrorMsg, Mode=TwoWay}"
+                HasError="{Binding ShowBuyQuantityError, Mode=TwoWay}"
+                Hint="Quantity">
+                <Entry
+                    FontAttributes="Bold"
+                    Keyboard="Numeric"
+                    Text="{Binding AOffer.BuyQuantity}">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding BuyQuantityValidation.ValidateCommand}" EventName="TextChanged" />
+                    </Entry.Behaviors>
+                </Entry>
+            </inputLayout:SfTextInputLayout>
+
+
+            <inputLayout:SfTextInputLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                Padding="4,0,4,0"
+                ContainerBackgroundColor="White"
+                ContainerType="Outlined"
+                ErrorColor="#F6522E"
+                ErrorText="{Binding TotalPriceErrorMsg, Mode=TwoWay}"
+                HasError="{Binding ShowErrorTotalPrice, Mode=TwoWay}"
+                Hint="Price Of">
+                <Entry
+                    FontAttributes="Bold"
+                    Keyboard="Numeric"
+                    Text="{Binding AOffer.TotalPrice, StringFormat='{0}'}">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding TotalPriceValidation.ValidateCommand}" EventName="TextChanged" />
+                    </Entry.Behaviors>
+                </Entry>
+            </inputLayout:SfTextInputLayout>
+
+            <Frame
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Padding="0"
+                CornerRadius="3"
+                HasShadow="True">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    HorizontalOptions="Center"
+                    Text="{Binding ItemValue, StringFormat='Value per item : {0:C}', Mode=TwoWay}"
+                    VerticalOptions="Center" />
+            </Frame>
+
+            <Button
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#FFC46B"
+                Command="{Binding }"
+                CornerRadius="2"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Text="Done" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

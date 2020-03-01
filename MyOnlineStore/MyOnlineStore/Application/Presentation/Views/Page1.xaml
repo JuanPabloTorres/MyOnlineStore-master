@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.Page1"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:anim="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:popups="clr-namespace:MyOnlineStore.Application.Presentation.Views.TemplatesViews.Popups"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    rainbow:DebugRainbow.IsDebug="False"
+    mc:Ignorable="d"
+    >
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <popups:StoreInstructionContentView ShowCommand="{Binding PopCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

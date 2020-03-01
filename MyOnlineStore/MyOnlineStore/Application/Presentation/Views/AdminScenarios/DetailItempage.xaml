@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Views.Administrator.DetailItempage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:converters="clr-namespace:MyOnlineStore.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{StaticResource PrimaryNavyBlue}"
+    mc:Ignorable="d">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BytesToImageConverter x:Key="btycvt" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+
+            <StackLayout
+                Padding="10"
+                Orientation="Vertical"
+                VerticalOptions="CenterAndExpand">
+
+                <abstractions:CircleImage
+                    HeightRequest="150"
+                    Source="{Binding Item.Image, Converter={StaticResource btycvt}}"
+                    WidthRequest="150" />
+
+                <Entry
+                    Placeholder="Item Name"
+                    PlaceholderColor="White"
+                    Text="{Binding Item.Text}"
+                    TextColor="White" />
+
+                <StackLayout Orientation="Vertical">
+
+                    <Label
+                        FontSize="Title"
+                        Text="Price"
+                        TextColor="White" />
+                    <Entry
+                        Keyboard="Numeric"
+                        Placeholder="Price"
+                        PlaceholderColor="White"
+                        Text="{Binding Item.Price}"
+                        TextColor="White" />
+                </StackLayout>
+
+                <Editor
+                    Placeholder="Description"
+                    PlaceholderColor="White"
+                    Text="{Binding Item.Description}"
+                    TextColor="White" />
+
+                <StackLayout Orientation="Vertical">
+
+                    <Label
+                        FontSize="Title"
+                        Text="Quantity"
+                        TextColor="White" />
+                    <Entry
+                        Keyboard="Numeric"
+                        Placeholder="Item Quantity"
+                        PlaceholderColor="White"
+                        Text="{Binding Item.Quantity}"
+                        TextColor="White" />
+                </StackLayout>
+
+                <Picker
+                    Title="Item Type"
+                    SelectedItem="{Binding Item.Type, Mode=TwoWay}"
+                    TitleColor="White">
+
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Food</x:String>
+                            <x:String>Clothes</x:String>
+                            <x:String>Car Tools</x:String>
+                            <x:String>Home Tools</x:String>
+                            <x:String>Service</x:String>
+
+                        </x:Array>
+                    </Picker.ItemsSource>
+
+                </Picker>
+
+                <Button
+                    Margin="5"
+                    BackgroundColor="{StaticResource PrimaryMint}"
+                    Command="{Binding UpdateCommand}"
+                    CornerRadius="10"
+                    FontSize="Large"
+                    ImageSource="update.png"
+                    Text="Update" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

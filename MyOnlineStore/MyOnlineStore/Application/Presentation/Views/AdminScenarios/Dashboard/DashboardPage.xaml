@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.AdminScenarios.DashboardPage"
+             Title="Dashboards">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ScrollView Orientation="Vertical">
+                <StackLayout BackgroundColor="{StaticResource PrimaryNavyBlue}">
+
+                    <pancakeview:PancakeView CornerRadius="3" HasShadow="True" BackgroundColor="#F2F8FD" Padding="3" Margin="5">
+
+                        <StackLayout  HorizontalOptions="Fill" VerticalOptions="Fill" >
+
+                            <Frame HasShadow="True" CornerRadius="3" Margin="5" BackgroundColor="#FFC11E">
+
+                                <Label Text="Orders Dashboard and Report" FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="CenterAndExpand" TextDecorations="Underline"></Label>
+                            </Frame>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Frame CornerRadius="5" HasShadow="True"  Margin="2"  Grid.Row="0" Grid.Column="0">
+                                    <StackLayout HorizontalOptions="Fill">
+                                        <Label Text="From" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                                        <DatePicker Date="{Binding OrderDateFrom ,Mode=TwoWay}"   Visual="Material"  FontSize="Title"></DatePicker>
+
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame CornerRadius="5" HasShadow="True" Margin="2"  Grid.Row="0" Grid.Column="1">
+
+                                    <StackLayout HorizontalOptions="Fill">
+
+                                        <Label Text="To" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                                        <DatePicker Date="{Binding OrderDateTo,Mode=TwoWay}"    FontSize="Title" ></DatePicker>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2"  Grid.Row="1" Grid.Column="0">
+
+                                    <Picker Title="Unit time ▼"   TitleColor="Black" FontAttributes="Bold" FontSize="Title"  SelectedItem="{Binding OrderUnitSelected}" >
+
+                                        <Picker.Items>
+                                            <x:String>Days</x:String>
+                                            <x:String>Weeks</x:String>
+                                            <x:String>Months</x:String>
+                                            <x:String>Years</x:String>
+
+
+
+
+                                        </Picker.Items>
+                                    </Picker>
+                                </Frame>
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2" Grid.Row="1" Grid.Column="1">
+
+                                    <Picker Title="Actions ▼"  TitleColor="Black"  FontAttributes="Bold" FontSize="Title"  SelectedItem="{Binding OrdersOptionSelected}" >
+
+                                        <Picker.Items>
+                                            <x:String>Orders Complete</x:String>
+                                            <x:String>Orders Not Completed</x:String>
+                                            <x:String>Show All Orders</x:String>
+
+                                        </Picker.Items>
+                                    </Picker>
+                                </Frame>
+
+                            </Grid>
+
+                            <Grid ColumnSpacing="4">
+
+
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="300"></RowDefinition>
+
+
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Frame  Grid.Row="0" Grid.Column="0" CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Orders"  FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+                                        <Label Text="{Binding OrdersCount,StringFormat='{0}'}" FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="0" Grid.Column="1"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Completed" FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"/>
+
+
+                                        <Label Text="{Binding TotalOrdersCompleted,StringFormat='{0}'}"  FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="0" Grid.Column="2"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Not Completed" FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+                                        <Label Text="{Binding TotalNotCompleted,StringFormat='{0}'}"  FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+
+
+                                <StackLayout Grid.Row="1"  Grid.ColumnSpan="3" Orientation="Vertical" Padding="5">
+                                    <Frame HasShadow="True" CornerRadius="3" Padding="2" BackgroundColor="#FFFCBB">
+                                        <Label Text="{Binding  OrderChartTitle}" FontSize="Title" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center"></Label>
+
+                                    </Frame>
+                                    <ScrollView Orientation="Horizontal">
+
+                                        <microcharts:ChartView Chart="{Binding OrderChart}" HeightRequest="300"  WidthRequest="{Binding OrderWidthChart,Mode=TwoWay}" />
+                                    </ScrollView>
+                                </StackLayout>
+                            </Grid>
+
+                            <Button Text="Check Orders" CornerRadius="3" BackgroundColor="#FFAD32" FontAttributes="Bold"  ></Button>
+
+                        </StackLayout>
+                    </pancakeview:PancakeView >
+
+                    <pancakeview:PancakeView CornerRadius="3" HasShadow="True"  BackgroundColor="#F2F8FD" Padding="3" Margin="5">
+
+                        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+
+                            <Frame HasShadow="True" CornerRadius="3" Margin="5" BackgroundColor="#FFC11E">
+                                <Label Text="Inventory Dashboard"  FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="CenterAndExpand" TextDecorations="Underline"/>
+                            </Frame>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+
+
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2"  Grid.Row="0" Grid.Column="0">
+                                    <Picker Title="Type ▼"    TitleColor="Black" FontSize="Title" SelectedItem="{Binding TypeFilterSelected}"  >
+
+                                        <Picker.Items>
+
+                                            <x:String>Food</x:String>
+                                            <x:String>Clothes</x:String>
+                                            <x:String>Car Tools</x:String>
+                                            <x:String>Home Tools</x:String>
+                                            <x:String>Service</x:String>
+                                        </Picker.Items>
+
+                                    </Picker>
+
+                                </Frame>
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2" Grid.Row="0" Grid.Column="1">
+
+                                    <Picker Title="Actions  ▼"  TitleColor="Black" FontSize="Title" SelectedItem="{Binding InventorySelecteOption}"  >
+
+                                        <Picker.Items>
+                                            <x:String>Show Top Sales</x:String>
+                                            <x:String>Low Quantity</x:String>
+                                            <x:String>High Quantity</x:String>
+                                            <x:String>Inventory Information</x:String>
+                                            <x:String>Products Earning</x:String>
+
+
+
+                                        </Picker.Items>
+                                    </Picker>
+                                </Frame>
+
+                            </Grid>
+
+                            <Grid ColumnSpacing="4">
+
+
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="300"></RowDefinition>
+
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Frame  Grid.Row="0" Grid.Column="0" CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Items"  FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+                                        <Label Text="{Binding TotalItems,StringFormat='{0}'}" FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="Center" ></Label>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="0" Grid.Column="1"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Value"  FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+                                        <Label Text="{Binding Value,StringFormat='{0:C}'}" FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout Grid.Row="1"  Grid.ColumnSpan="2" Orientation="Vertical">
+                                    <Frame HasShadow="True" CornerRadius="3" Padding="2" BackgroundColor="#FFFCBB">
+                                        <Label Text="{Binding  InventoryTitle}" FontSize="Title" FontAttributes="Bold"  TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center"></Label>
+
+                                    </Frame>
+
+                                    <ScrollView Orientation="Horizontal">
+
+                                        <microcharts:ChartView Chart="{Binding InventoryChart }"  HeightRequest="300" WidthRequest="{Binding InventoryChartWidthRequest,Mode=TwoWay}" />
+                                    </ScrollView>
+
+                                </StackLayout>
+
+
+
+
+                            </Grid>
+                            <Button Text="Check Inventory" CornerRadius="3" BackgroundColor="#FFAD32" FontAttributes="Bold"></Button>
+                        </StackLayout>
+                    </pancakeview:PancakeView>
+
+                    <pancakeview:PancakeView CornerRadius="3" HasShadow="True" BorderDrawingStyle="Outside" BackgroundColor="#F2F8FD" Padding="3" Margin="5">
+
+                        <StackLayout>
+                            <Frame HasShadow="True" CornerRadius="3" Margin="5" BackgroundColor="#FFC11E">
+                                <Label Text="Goals Dashboard and Report" FontAttributes="Bold" TextColor="Black" FontSize="Title" HorizontalOptions="CenterAndExpand" TextDecorations="Underline"></Label>
+                            </Frame>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Frame CornerRadius="5" HasShadow="True"  Margin="2"  Grid.Row="0" Grid.Column="0">
+                                    <StackLayout HorizontalOptions="Fill">
+                                        <Label Text="From" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                                        <DatePicker Date="{Binding FromDate ,Mode=TwoWay}"   Visual="Material"   FontSize="Title"></DatePicker>
+
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame CornerRadius="5" HasShadow="True" Margin="2"  Grid.Row="0" Grid.Column="1">
+
+                                    <StackLayout HorizontalOptions="Fill">
+
+                                        <Label Text="To" FontAttributes="Bold" FontSize="Body" TextColor="Black"></Label>
+                                        <DatePicker Date="{Binding ToDate,Mode=TwoWay}"    Visual="Material"   FontSize="Title"></DatePicker>
+
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2"  Grid.Row="1" Grid.Column="0">
+                                    <Picker Title="Unit Time  ▼"  TitleColor="Black"   FontAttributes="Bold" FontSize="Title"  SelectedItem="{Binding GoalUnitTime}" >
+
+                                        <Picker.Items>
+                                            <x:String>Days</x:String>
+                                            <x:String>Weeks</x:String>
+                                            <x:String>Months</x:String>
+                                            <x:String>Years</x:String>
+
+
+
+
+                                        </Picker.Items>
+                                    </Picker>
+
+                                </Frame>
+
+                                <Frame HasShadow="True" CornerRadius="3"  Margin="2" Grid.Row="1" Grid.Column="1">
+                                    <Picker Title="Actions  ▼"  TitleColor="Black"   FontAttributes="Bold" FontSize="Title" SelectedItem="{Binding GoalOptionSelected}">
+
+                                        <Picker.Items>
+                                            <x:String>Show Progess</x:String>
+
+
+                                        </Picker.Items>
+                                    </Picker>
+
+                                </Frame>
+
+                            </Grid>
+
+                            <Grid>
+
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="300"></RowDefinition>
+
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+
+                                </Grid.ColumnDefinitions>
+                                <Frame  Grid.Row="0" Grid.Column="0" CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout>
+                                        <Label Text="Value" FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+
+
+                                        <Label Text="{Binding ValueReached ,StringFormat='{0:C}'}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" FontSize="Title"></Label>
+
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="0" Grid.Column="1"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B">
+                                    <StackLayout>
+                                        <Label Text="Goal Day" FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+                                        <ScrollView Orientation="Horizontal">
+
+                                            <Label Text="{Binding ToReached,StringFormat='{0:C}'}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" FontSize="Title"></Label>
+                                        </ScrollView>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="1" Grid.Column="0"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B" Padding="0">
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label Text="Goal" FontAttributes="Bold" TextColor="Black" FontSize="Caption" HorizontalOptions="Center"></Label>
+
+                                        <Label Text="{Binding TotalToReached,StringFormat=' {0:C}'}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" FontSize="Title" LineBreakMode="WordWrap"></Label>
+
+                                    </StackLayout>
+                                </Frame>
+                                <Frame  Grid.Row="1" Grid.Column="1"  CornerRadius="5" HasShadow="True" BackgroundColor="#FFC46B" Padding="0">
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label Text="Completed" FontAttributes="Bold" TextColor="Black" FontSize="Caption" LineBreakMode="WordWrap"    HorizontalOptions="Center"></Label>
+                                        <Label Text="{Binding PercentCompleted,StringFormat='{0}%'}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" FontSize="Title"></Label>
+                                    </StackLayout>
+                                </Frame>
+
+
+                                <StackLayout Grid.Row="2"  Grid.ColumnSpan="2" Orientation="Vertical">
+
+                                    <Frame HasShadow="True" CornerRadius="3" Padding="2" BackgroundColor="#FFFCBB">
+                                        <Label Text="{Binding  GoalChartTitle}" FontSize="Title" TextColor="Black" FontAttributes="Bold"  HorizontalTextAlignment="Start" HorizontalOptions="Center"></Label>
+
+                                    </Frame>
+
+                                    <ScrollView   Orientation="Horizontal">
+                                        <microcharts:ChartView Chart="{Binding  GoalProgressChart}" WidthRequest="{Binding WidthRequest ,Mode=TwoWay}"  HeightRequest="300" />
+
+                                    </ScrollView>
+                                </StackLayout>
+                            </Grid>
+
+
+
+
+                        </StackLayout>
+                    </pancakeview:PancakeView>
+
+                </StackLayout>
+
+
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

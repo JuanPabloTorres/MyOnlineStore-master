@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.OfferContent"
+            xmlns:local="clr-namespace:MyOnlineStore.Application.Presentation.Views.AdminScenarios"
+            xmlns:adminscenarios="clr-namespace:MyOnlineStore.Views.AdminScenarios">
+  <!--Pages can be added as references or inline-->
+
+    <adminscenarios:OffersAndContent Title="Create Offer"></adminscenarios:OffersAndContent>
+    <local:FeaturedItemUpload Title="Create Content"></local:FeaturedItemUpload>
+    
+</TabbedPage>

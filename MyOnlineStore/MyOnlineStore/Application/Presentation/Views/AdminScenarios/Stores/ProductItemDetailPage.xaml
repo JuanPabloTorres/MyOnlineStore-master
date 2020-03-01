@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.ProductItemDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    rainbow:DebugRainbow.IsDebug="False"
+    BackgroundColor="{StaticResource Background}"
+    Routing.Route="{StaticResource ProductItemDetailPageRoute}"
+    Visual="Material"
+    mc:Ignorable="d"
+    >
+
+    <Shell.TitleView>
+        <Button Text="Get info with Scan Barcode">
+            <Button.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    Command="{Binding ScanBarcodeCommand}"
+                    EventName="Clicked"
+                    />
+            </Button.Behaviors>
+        </Button>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="IsEditableEntryStyle"
+                ApplyToDerivedTypes="True"
+                BasedOn="{StaticResource EntryStyle}"
+                CanCascade="True"
+                TargetType="{x:Type Entry}"
+                >
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="IsReadOnly" Value="{Binding IsEditable, Converter={StaticResource BoolStringConverter}}" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="IsEnabled" Value="{Binding IsEditable, Converter={StaticResource BoolStringConverter}}" />
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="IsReadOnly" Value="{Binding IsEditable, Converter={StaticResource BoolStringConverter}}" />
+                <Setter Property="Margin" Value="10,0,10,0" />
+                <Style.Triggers>
+                    <Trigger TargetType="Editor" Property="IsEnabled" Value="{Binding IsEditable, Converter={StaticResource BoolStringConverter}}" />
+                </Style.Triggers>
+            </Style>
+            <Style
+                ApplyToDerivedTypes="True"
+                BasedOn="{StaticResource InputStyle}"
+                CanCascade="True"
+                TargetType="{x:Type inputLayout:SfTextInputLayout}"
+                >
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+            <Style
+                ApplyToDerivedTypes="True"
+                BasedOn="{StaticResource ThemePrimaryButtonLightText}"
+                CanCascade="True"
+                TargetType="{x:Type button:SfButton}"
+                >
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ffimage:CachedImage
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Aspect="AspectFill"
+                        BackgroundColor="Silver"
+                        CacheType="Memory"
+                        HeightRequest="175"
+                        Source="{Binding ProductImageSource,
+                                         Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                        />
+
+                    <button:SfButton
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        IsVisible="{Binding IsEditable,
+                                            Converter={StaticResource BoolStringConverter},
+                                            ConverterParameter='!'}"
+                        Text="Add Photo"
+                        >
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding GetProductPhotoCommand}"
+                                EventName="Clicked"
+                                />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+
+                    <button:SfButton
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        IsVisible="{Binding IsEditable,
+                                            Converter={StaticResource BoolStringConverter},
+                                            ConverterParameter='!'}"
+                        Text="Take Photo"
+                        >
+                        <button:SfButton.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding GetProductPhotoCommand}"
+                                EventName="Clicked"
+                                />
+                        </button:SfButton.Behaviors>
+                    </button:SfButton>
+                </Grid>
+
+                <!--  PRODUCT SECTION LABEL  -->
+                <AbsoluteLayout Margin="5,10,0,0">
+                    <cake:PancakeView
+                        AbsoluteLayout.LayoutBounds="0,0,0.75,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        BackgroundColor="{StaticResource LightSilver}"
+                        CornerRadius="10,0,0,10"
+                        >
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="30"
+                            HorizontalTextAlignment="Center"
+                            Text="Product Item Information:"
+                            VerticalTextAlignment="Center"
+                            />
+                    </cake:PancakeView>
+                </AbsoluteLayout>
+
+                <!--  PRODUCT NAME  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding ItemName.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding ItemName.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Product Name"
+                    >
+                    <Entry
+                        Keyboard="Text"
+                        Text="{Binding ItemName.Value,
+                                       Mode=TwoWay}"
+                        >
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding ItemName.ValidateCommand}"
+                                EventName="TextChanged"
+                                />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+
+                <StackLayout Orientation="Horizontal">
+                    <!--  PRICE ENTRY  -->
+                    <inputLayout:SfTextInputLayout
+                        ErrorText="{Binding Price.Errors,
+                                            Converter={StaticResource FirstValidationErrorConverter}}"
+                        HasError="{Binding Price.IsValid,
+                                           Converter={StaticResource NegateBoolConverter}}"
+                        Hint="Price"
+                        >
+                        <Entry
+                            Keyboard="Text"
+                            Text="{Binding Price.Value,
+                                           Mode=TwoWay}"
+                            >
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                    Command="{Binding Price.ValidateCommand}"
+                                    EventName="TextChanged"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </inputLayout:SfTextInputLayout>
+
+                    <!--  QUANTITY ENTRY  -->
+                    <inputLayout:SfTextInputLayout
+                        ErrorText="{Binding Quantity.Errors,
+                                            Converter={StaticResource FirstValidationErrorConverter}}"
+                        HasError="{Binding Quantity.IsValid,
+                                           Converter={StaticResource NegateBoolConverter}}"
+                        Hint="Quantity"
+                        >
+                        <Entry
+                            Keyboard="Text"
+                            Text="{Binding Quantity.Value,
+                                           Mode=TwoWay}"
+                            >
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                    Command="{Binding Quantity.ValidateCommand}"
+                                    EventName="TextChanged"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+
+                <!--  TYPE OF ITEM  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding TypeOfItem.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding TypeOfItem.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="TypeOfItem"
+                    >
+                    <Entry
+                        Keyboard="Text"
+                        Text="{Binding TypeOfItem.Value,
+                                       Mode=TwoWay}"
+                        >
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding TypeOfItem.ValidateCommand}"
+                                EventName="TextChanged"
+                                />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  DESCRIPTION ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding Description.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding Description.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Description"
+                    IsHintAlwaysFloated="True"
+                    >
+                    <Editor
+                        AutoSize="TextChanges"
+                        HeightRequest="125"
+                        InputTransparent="False"
+                        Keyboard="Text"
+                        Text="{Binding Description.Value,
+                                       Mode=TwoWay}"
+                        >
+                        <Editor.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding Description.ValidateCommand}"
+                                EventName="TextChanged"
+                                />
+                        </Editor.Behaviors>
+                    </Editor>
+                </inputLayout:SfTextInputLayout>
+
+                <button:SfButton
+                    Margin="15,0,15,10"
+                    Command="{Binding AddToInventoryCommand}"
+                    IsVisible="{Binding IsEditable,
+                                        Converter={StaticResource BoolStringConverter},
+                                        ConverterParameter='!'}"
+                    Style="{StaticResource BoldedThemePrimaryButton}"
+                    Text="Add To Inventory"
+                    />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.ContentStepView.EditPicture"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:imageeditor="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+    Title="Create Content"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <imageeditor:SfImageEditor
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HeightRequest="500"
+                Source="{Binding ItemImage, Mode=TwoWay}" />
+
+
+            <Button
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
+                Command="{Binding UploadImageContentCommand}"
+                FontAttributes="Bold"
+                FontSize="Body"
+                Text="Select Picture" />
+
+
+
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Clicked="go"
+                FontAttributes="Bold"
+                FontSize="40"
+                ImageSource="back.png"
+                VerticalOptions="End" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Command="{Binding SaveFeatureItem}"
+                FontAttributes="Bold"
+                FontSize="40"
+                Text="Done"
+                VerticalOptions="End" />
+
+
+        </Grid>
+
+
+    </ContentPage.Content>
+</ContentPage>

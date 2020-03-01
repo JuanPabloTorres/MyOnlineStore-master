@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Dashboard.Sections.GoalDashboard"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:MyOnlineStore.Application.Common.Utilities"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+    BackgroundColor="White"
+    mc:Ignorable="d"
+    >
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical">
+            <syncfusion:SfExpander Margin="4">
+                <syncfusion:SfExpander.Header>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Title"
+                        Text="Filter Tools"
+                        TextColor="#495F6E"
+                        />
+                </syncfusion:SfExpander.Header>
+                <syncfusion:SfExpander.Content>
+                    <StackLayout
+                        BackgroundColor="#FFFFFF"
+                        Orientation="Vertical"
+                        >
+                        <Button
+                            BackgroundColor="#FFAD32"
+                            Command="{Binding GoalFilterCommand}"
+                            CornerRadius="3"
+                            FontAttributes="Bold"
+                            Text="Filter"
+                            />
+
+                        <calendar:SfCalendar
+                            Grid.Row="0"
+                            HeightRequest="250"
+                            SelectedRange="{Binding SelectedRange,
+                                                    Mode=TwoWay}"
+                            SelectionMode="RangeSelection"
+                            ShowInlineEvents="True"
+                            />
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="Auto" />
+
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+
+
+                            </Grid.ColumnDefinitions>
+                          
+
+                            <Frame
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="2"
+                                Padding="0"
+                                CornerRadius="3"
+                                HasShadow="True"
+                                >
+                                <combobox:SfComboBox
+                                    DataSource="{Binding GoalActions}"
+                                    SelectedItem="{Binding}"
+                                    Text="Actions"
+                                    />
+                            </Frame>
+
+                        </Grid>
+
+                    </StackLayout>
+                </syncfusion:SfExpander.Content>
+            </syncfusion:SfExpander>
+
+            <ScrollView Orientation="Vertical">
+
+                <pancakeview:PancakeView
+                    Margin="5"
+                    Padding="3"
+                    BackgroundColor="#F2F8FD"
+                    BorderDrawingStyle="Outside"
+                    CornerRadius="3"
+                    HasShadow="True"
+                    >
+
+                    <StackLayout>
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+
+                                <RowDefinition Height="300" />
+
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+
+
+                            </Grid.ColumnDefinitions>
+                            <Frame
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                BackgroundColor="#FFC46B"
+                                CornerRadius="5"
+                                HasShadow="True"
+                                >
+                                <StackLayout>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Caption"
+                                        HorizontalOptions="Center"
+                                        Text="Value"
+                                        TextColor="Black"
+                                        />
+
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Title"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding ValueReached,
+                                                       StringFormat='{0:C}'}"
+                                        TextColor="Black"
+                                        />
+
+                                </StackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                BackgroundColor="#FFC46B"
+                                CornerRadius="5"
+                                HasShadow="True"
+                                >
+                                <StackLayout>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Caption"
+                                        HorizontalOptions="Center"
+                                        Text="Goal Day"
+                                        TextColor="Black"
+                                        />
+                                    <ScrollView Orientation="Horizontal">
+
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Title"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding ToReached,
+                                                           StringFormat='{0:C}'}"
+                                            TextColor="Black"
+                                            />
+                                    </ScrollView>
+                                </StackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Padding="0"
+                                BackgroundColor="#FFC46B"
+                                CornerRadius="5"
+                                HasShadow="True"
+                                >
+                                <StackLayout VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Caption"
+                                        HorizontalOptions="Center"
+                                        Text="Goal"
+                                        TextColor="Black"
+                                        />
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Title"
+                                        HorizontalOptions="Center"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding TotalToReached,
+                                                       StringFormat=' {0:C}'}"
+                                        TextColor="Black"
+                                        />
+
+                                </StackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Padding="0"
+                                BackgroundColor="#FFC46B"
+                                CornerRadius="5"
+                                HasShadow="True"
+                                >
+                                <StackLayout VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Caption"
+                                        HorizontalOptions="Center"
+                                        LineBreakMode="WordWrap"
+                                        Text="Completed"
+                                        TextColor="Black"
+                                        />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Title"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding PercentCompleted,
+                                                       StringFormat='{0}%'}"
+                                        TextColor="Black"
+                                        />
+                                </StackLayout>
+                            </Frame>
+
+
+                            <chart:SfChart
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="White"
+                                IsEnabled="True"
+                                Visual="Material"
+                                >
+
+                                <chart:SfChart.ChartAnnotations>
+                                    <chart:HorizontalLineAnnotation
+                                        FillColor="Black"
+                                        ShowAxisLabel="true"
+                                        Y1="{Binding GoalToReach,
+                                                     Mode=TwoWay}"
+                                        />
+                                </chart:SfChart.ChartAnnotations>
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:DateTimeCategoryAxis
+                                        Interval="1"
+                                        IntervalType="Auto"
+                                        >
+
+                                        <chart:DateTimeCategoryAxis.Title>
+                                            <chart:ChartAxisTitle
+                                                FontAttributes="Bold"
+                                                Text="Dates"
+                                                />
+                                        </chart:DateTimeCategoryAxis.Title>
+                                    </chart:DateTimeCategoryAxis>
+                                </chart:SfChart.PrimaryAxis>
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis>
+                                        <chart:NumericalAxis.Title>
+                                            <chart:ChartAxisTitle
+                                                FontAttributes="Bold"
+                                                Text="Values"
+                                                />
+                                        </chart:NumericalAxis.Title>
+                                    </chart:NumericalAxis>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:ColumnSeries
+                                    EnableTooltip="True"
+                                    ItemsSource="{Binding ,Mode=TwoWay}"
+                                    XBindingPath="RecordDate"
+                                    YBindingPath="RecordValue"
+                                    />
+                            </chart:SfChart>
+
+
+
+                        </Grid>
+                    </StackLayout>
+                </pancakeview:PancakeView>
+            </ScrollView>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

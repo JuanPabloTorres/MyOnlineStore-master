@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.FeaturedItemUpload"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:card="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:cardControl="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+    xmlns:cardProc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:viewModel="clr-namespace:MyOnlineStore.Application.Presentaion.ViewModels.AdminScenarios"
+    Routing.Route="FeaturedItemUpload"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                ApplyToDerivedTypes="True"
+                CanCascade="True"
+                TargetType="Button">
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <card:CarouselView
+                x:Name="coverFlow"
+                AreAnimationsEnabled="True"
+                BackgroundColor="Gray"
+                IsCyclical="True"
+                ItemsSource="{Binding FeaturedItems, Mode=TwoWay}"
+                SelectedIndex="{Binding CurrentIndex, Mode=TwoWay}"
+                SlideShowDuration="0">
+
+                <x:Arguments>
+                    <cardProc:BaseCarouselFrontViewProcessor
+                        OpacityFactor="0"
+                        RotationFactor="0"
+                        ScaleFactor="0.5" />
+                    <cardProc:BaseCarouselBackViewProcessor
+                        OpacityFactor="0"
+                        RotationFactor="0"
+                        ScaleFactor="0.5" />
+
+                </x:Arguments>
+                <card:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <cake:PancakeView
+                            Margin="40"
+                            Padding="0"
+                            BorderColor="Black"
+                            BorderDrawingStyle="Outside"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            HasShadow="True"
+                            HeightRequest="300"
+                            HorizontalOptions="Center"
+                            IsClippedToBounds="True"
+                            VerticalOptions="Center"
+                            WidthRequest="300">
+                            <ffimage:CachedImage
+                                Aspect="AspectFill"
+                                CacheType="Memory"
+                                Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                        </cake:PancakeView>
+                    </DataTemplate>
+                </card:CarouselView.ItemTemplate>
+
+                <cardControl:IndicatorsControl ToFadeDuration="0" />
+            </card:CarouselView>
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+                <Button
+                    Padding="2"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Add Content">
+                    <Button.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding UploadImageContentCommand}" EventName="Clicked" />
+                    </Button.Behaviors>
+                </Button>
+                <Button
+                    Padding="2"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Insert Content">
+                    <Button.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            Command="{Binding InsertContentImageCommand}"
+                            CommandParameter="{Binding Source={x:Reference coverFlow}, Path=SelectedIndex}"
+                            EventName="Clicked" />
+                    </Button.Behaviors>
+                </Button>
+                <Button
+                    Padding="2"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Remove Content">
+                    <Button.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            Command="{Binding RemoveContentImageCommand}"
+                            CommandParameter="{Binding Source={x:Reference coverFlow}, Path=SelectedIndex}"
+                            EventName="Clicked" />
+                    </Button.Behaviors>
+                </Button>
+            </StackLayout>
+            <Button
+                HorizontalOptions="CenterAndExpand"
+                Text="Save Content"
+                VerticalOptions="CenterAndExpand">
+                <Button.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding SaveContentToCurrentStore}" EventName="Clicked" />
+                </Button.Behaviors>
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

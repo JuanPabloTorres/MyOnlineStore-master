@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.WorkSpace.DetailWorkSpace"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfAvatarView="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    Title="Detail WorkSpace"
+    Routing.Route="{StaticResource DetailWorkSpaceRoute}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <sfAvatarView:SfAvatarView
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="4"
+                AvatarName="{Binding DetailEmployee.FullName}"
+                AvatarShape="Square"
+                HorizontalOptions="Center"
+                InitialsType="SingleCharacter"
+                VerticalOptions="Start" />
+
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="4"
+                FontSize="Title"
+                HorizontalOptions="Start"
+                Text="{Binding DetailEmployee.FullName, StringFormat='Name: {0} '}"
+                VerticalOptions="Start" />
+            <Label
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Margin="4"
+                FontSize="Title"
+                HorizontalOptions="Start"
+                Text="{Binding DetailEmployee.EmployeePosition, StringFormat='Employee Position: {0} '}"
+                VerticalOptions="Start" />
+
+            <listview:SfListView
+                x:Name="listView"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                AutoFitMode="Height"
+                IsStickyHeader="True"
+                ItemsSource="{Binding DetailEmployee.EmployeeWork, Mode=TwoWay}">
+
+                <listview:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <Grid>
+
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    Text="Days" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    Text="From" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    Text="To" />
+                            </Grid>
+
+
+                        </ViewCell>
+                    </DataTemplate>
+
+                </listview:SfListView.HeaderTemplate>
+
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame
+                            Margin="4"
+                            Padding="2"
+                            BorderColor="LightGray"
+                            CornerRadius="5"
+                            HasShadow="True"
+                            HorizontalOptions="FillAndExpand">
+
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontAttributes="Bold"
+                                    FontSize="21"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Day}"
+                                    TextColor="Teal" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Start}"
+                                    TextColor="Teal" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding End}"
+                                    TextColor="Teal" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+
+                </listview:SfListView.ItemTemplate>
+
+
+            </listview:SfListView>
+
+
+            <!--<button:SfButton
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Command="{Binding EditCommand}"
+                FontSize="30"
+                HasShadow="True"
+                ImageSource="edit.png"
+                ImageWidth="75"
+                ShowIcon="True"
+                Text="Edit Employee"
+                TextColor="White">
+                <button:SfButton.BackgroundGradient>
+                    <gradient:SfRadialGradientBrush Radius="4">
+                        <gradient:SfRadialGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Offset="0" Color="#FF9415" />
+                            <gradient:SfGradientStop Offset="1" Color="#FFC709" />
+                        </gradient:SfRadialGradientBrush.GradientStops>
+                    </gradient:SfRadialGradientBrush>
+                </button:SfButton.BackgroundGradient>
+            </button:SfButton>-->
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

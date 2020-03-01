@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.Views.Templates.StepperView.StepperView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:numerictextbox="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+    x:Name="this"
+    Visual="Material"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <cake:PancakeView
+            BackgroundColor="{StaticResource LightSilver}"
+            CornerRadius="10"
+            HeightRequest="30"
+            WidthRequest="90"
+            >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="26" />
+                    <ColumnDefinition Width="26" />
+                    <ColumnDefinition Width="26" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="2,0,0,0"
+                    Aspect="AspectFit"
+                    Clicked="ImageButton_Clicked_Minus"
+                    CornerRadius="10"
+                    Source="icon_minus.png"
+                    />
+                <!--<numerictextbox:SfNumericTextBox
+                    x:Name="numerictextbox"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="Red"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Value="{Binding Source={x:Reference this}, Path=Counter, Converter={StaticResource UIntToStringConverter}}" />-->
+                <!--<inputLayout:SfTextInputLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0"
+                    Padding="0"
+                    ContainerBackgroundColor="{StaticResource CardWhite}"
+                    ContainerType="None"
+                    HeightRequest="26"
+                    HorizontalOptions="FillAndExpand"
+                    IsHintAlwaysFloated="False"
+                    ReserveSpaceForAssistiveLabels="False"
+                    VerticalOptions="Start">
+                    <Entry
+                        BackgroundColor="Red"
+                        HeightRequest="26"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Keyboard="Numeric"
+                        ReturnType="Done"
+                        Text="{Binding Source={x:Reference this}, Path=Counter, Converter={StaticResource UIntToStringConverter}}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+                </inputLayout:SfTextInputLayout>-->
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Source={x:Reference this},
+                                   Path=Counter,
+                                   Converter={StaticResource UIntToStringConverter}}"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center"
+                    />
+                <!--<Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding QuantityOfSelectedItems}"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />-->
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,2,0"
+                    Aspect="AspectFit"
+                    Clicked="ImageButton_Clicked_Plus"
+                    CornerRadius="10"
+                    Source="icon_plus.png"
+                    />
+                <!--<ImageButton
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,2,0"
+                    Aspect="AspectFit"
+                    Command="{Binding Source={x:Reference this}, Path=PlusClickCommand}"
+                    CornerRadius="10"
+                    Source="icon_plus.png" />-->
+            </Grid>
+        </cake:PancakeView>
+    </ContentView.Content>
+</ContentView>

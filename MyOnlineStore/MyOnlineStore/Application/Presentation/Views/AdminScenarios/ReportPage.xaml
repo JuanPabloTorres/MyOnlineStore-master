@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.Administrator.ReportPage">
+    <ContentPage.Content>
+
+        <ScrollView Orientation="Vertical">
+        <StackLayout Padding="5">
+                <Label Text="Items Available"></Label>
+            <microcharts:ChartView 
+       x:Name="InventoryChart" Chart="{Binding InventoryChart}"
+       IsVisible="True" FlowDirection="LeftToRight"
+       BackgroundColor="Transparent" Visual="Material" HeightRequest="500"
+       Grid.Row="0"  Grid.ColumnSpan="2"/>
+
+            <Label Text="Sales By Day"></Label>
+            <microcharts:ChartView 
+       x:Name="SalesChart" Chart="{Binding SalesChart,Mode=TwoWay}"
+       IsVisible="True" FlowDirection="LeftToRight" HeightRequest="500"
+       BackgroundColor="Transparent" Visual="Material"
+       Grid.Row="0"  Grid.ColumnSpan="2"/>
+
+
+
+                <ListView ItemsSource="{Binding OrdersItems}" HeightRequest="500"  VerticalScrollBarVisibility="Always" Header="" HasUnevenRows="False" >
+
+                  
+
+                    <ListView.ItemTemplate >
+
+                     
+
+
+                        <DataTemplate>
+                            <ViewCell>
+                                
+                            <StackLayout Spacing="8">
+
+                                    <Label Text="{Binding orderId,StringFormat='Order:{0}'}"></Label>
+                                    <Label Text="{Binding OrderDate}"></Label>
+                                    <ListView ItemsSource="{Binding OrderItems}" HeightRequest="500">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <ViewCell>
+
+                                                <StackLayout>
+
+                                                    <Label Text="{Binding Text}">
+
+                                                    </Label>
+                                                    <Label Text="{Binding Price}"></Label>
+
+                                                </StackLayout>
+                                            </ViewCell>
+
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                            </StackLayout>
+                            </ViewCell>
+
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+
+              
+
+            </StackLayout>
+            
+            
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

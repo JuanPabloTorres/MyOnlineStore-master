@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "MyOnlineStore.MobileAppService": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5000",
+      "Enviroment": "Development",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

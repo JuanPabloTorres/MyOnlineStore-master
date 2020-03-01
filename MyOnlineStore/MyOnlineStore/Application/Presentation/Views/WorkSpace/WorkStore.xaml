@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.WorkSpace.WorkStore"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:converter="clr-namespace:MyOnlineStore.Application.Presentation.PresentationHelpers.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfAvatarView="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    Title="Work Space"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteArrayToImageSourceConverter x:Key="bytestoimg" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+
+        <StackLayout>
+            <listview:SfListView
+                x:Name="listView"
+                Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Margin="5"
+                AllowSwiping="True"
+                AutoFitMode="DynamicHeight"
+                BackgroundColor="#FEFCFF"
+                ItemsSource="{Binding WorkPresenter}"
+                SelectionBackgroundColor="Transparent"
+                SelectionMode="Single">
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame
+                            Margin="4"
+                            Padding="0"
+                            BorderColor="Gray"
+                            HasShadow="True">
+
+                            <Grid Margin="4" HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Source="{Binding Store.Logo, Converter={StaticResource bytestoimg}}" />
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="Title"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding Store.StoreName}"
+                                    TextColor="Gray"
+                                    VerticalOptions="Center" />
+
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Fill"
+                                    Orientation="Vertical"
+                                    VerticalOptions="Center">
+
+                                    <Label
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding EmployeePosition, StringFormat='Position: {0}'}"
+                                        TextColor="SlateGray"
+                                        VerticalOptions="Center" />
+
+                                </StackLayout>
+
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    Orientation="Horizontal">
+
+                                    <button:SfButton
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        Command="{Binding DetailCommand}"
+                                        FontSize="25"
+                                        HorizontalOptions="Center"
+                                        ImageSource="employeeprofile.png"
+                                        ShowIcon="True"
+                                        VerticalOptions="Center" />
+
+                                    <button:SfButton
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        Command="{Binding DeleteCommand}"
+                                        FontAttributes="Bold"
+                                        FontSize="25"
+                                        HorizontalOptions="Center"
+                                        ImageSource="delete.png"
+                                        ShowIcon="True"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+
+            </listview:SfListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

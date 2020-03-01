@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.ContentStepView.SelectedDate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Content Start and End Dates"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <calendar:SfCalendar
+                x:Name="calendar"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                SelectedRange="{Binding ContentDate, Mode=TwoWay}"
+                SelectionMode="RangeSelection" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Command="{Binding NextCommand}"
+                FontAttributes="Bold"
+                FontSize="40"
+                ImageSource="next.png" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Clicked="back"
+                FontAttributes="Bold"
+                FontSize="40"
+                ImageSource="back.png" />
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

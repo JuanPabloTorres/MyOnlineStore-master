@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:MyOnlineStore.Behaviors"
+             xmlns:adminViews="clr-namespace:MyOnlineStore.Views.AdminScenarios"
+             mc:Ignorable="d"
+             x:Class="MyOnlineStore.Views.AdminScenarios.InventoryCollection"
+             >
+    <Shell.TitleView>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0,0,0.8,0.8"
+                AbsoluteLayout.LayoutFlags="All"
+                FontSize="22"
+                HorizontalOptions="StartAndExpand"
+                Text="Inventory List"
+                TextColor="White"
+                VerticalOptions="End" />
+            <ImageButton
+                AbsoluteLayout.LayoutBounds="0.97,0.35,0.15,0.65"
+                AbsoluteLayout.LayoutFlags="All"
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                Source="plus.png">
+                <ImageButton.Behaviors>
+                    <behaviors:EventToCommandBehavior Command="{Binding NavigateToNewProductItemDetailPageCommand}" EventName="Clicked" />
+                </ImageButton.Behaviors>
+            </ImageButton>
+        </AbsoluteLayout>
+    </Shell.TitleView>
+
+    <RefreshView
+        BackgroundColor="{StaticResource White}"
+        Command="{Binding RefreshCommand}"
+        IsRefreshing="{Binding IsBusy}"
+        RefreshColor="{StaticResource PrimaryNavyBlue}">
+
+        <CollectionView
+            ItemsSource="{Binding InventoryItems}"
+            SelectedItem="{Binding CurrentItem}"
+            SelectionMode="Single">
+
+            <CollectionView.EmptyView>
+                <Label
+                    FontSize="22"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="The Inventory is Empty!"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    Command="{Binding NavigateToProductItemDetailPageCommand}"
+                    EventArgsConverter="{StaticResource SelectionChangedArgsConverter}"
+                    EventName="SelectionChanged" />
+            </CollectionView.Behaviors>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <adminViews:ProductItemInventoryCardView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </RefreshView>
+</ContentView>

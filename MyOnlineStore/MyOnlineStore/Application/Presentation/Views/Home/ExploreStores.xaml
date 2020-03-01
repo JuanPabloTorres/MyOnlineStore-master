@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.Home.ExploreStores"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:storesViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.StoresScenarios.Views"
+    BackgroundColor="{StaticResource Secondary}"
+    Visual="Material"
+    mc:Ignorable="d">
+
+    <Shell.TitleView>
+        <cake:PancakeView
+            Margin="5"
+            BorderColor="Gray"
+            CornerRadius="5">
+            <Label
+                FontSize="{OnPlatform Android=20,
+                                      iOS=20}"
+                HorizontalTextAlignment="Start"
+                Text="Find Store"
+                TextColor="{StaticResource CardWhite}"
+                VerticalTextAlignment="Center" />
+        </cake:PancakeView>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout Padding="0">
+                <cake:PancakeView
+                    Margin="5"
+                    AbsoluteLayout.LayoutBounds="0,0,1,0.1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    CornerRadius="5">
+                    <SearchBar
+                        x:Name="searchBar"
+                        BackgroundColor="{StaticResource CardWhite}"
+                        HorizontalOptions="FillAndExpand"
+                        MaxLength="20"
+                        Placeholder="Search by: Store's Name, Category"
+                        VerticalOptions="FillAndExpand">
+                        <SearchBar.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding SearchCommand}"
+                                CommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                                EventName="TextChanged" />
+                        </SearchBar.Behaviors>
+                    </SearchBar>
+                </cake:PancakeView>
+                <storesViews:StoresCollectionView AbsoluteLayout.LayoutBounds="0,0.8,1,0.9" AbsoluteLayout.LayoutFlags="All" StoreList="{Binding Stores}"/>
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

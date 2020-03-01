@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.StoreProductContent.StoreProductsToBuy"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:converter="clr-namespace:MyOnlineStore.Application.Presentation.PresentationHelpers.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+    xmlns:sfListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    Routing.Route="{StaticResource StoreProductsToBuyRoute}"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteArrayToImageSourceConverter x:Key="bytestoimg" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <sfListView:SfListView
+                AbsoluteLayout.LayoutBounds="0,50,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                AutoFitMode="DynamicHeight"
+                IsStickyHeader="True"
+                ItemSpacing="3"
+                ItemsSource="{Binding Products, Mode=TwoWay}">
+
+                <sfListView:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <cake:PancakeView
+                            Margin="5,5,5,0"
+                            AbsoluteLayout.LayoutBounds="0,0,1,45"
+                            AbsoluteLayout.LayoutFlags="WidthProportional"
+                            BackgroundColor="{StaticResource CardWhite}"
+                            CornerRadius="5">
+                            <SearchBar
+                                x:Name="Filter"
+                                HorizontalOptions="CenterAndExpand"
+                                Keyboard="Default"
+                                MaxLength="20"
+                                Placeholder="Search..."
+                                Text="{Binding SearchText}"
+                                TextColor="{StaticResource Primary}"
+                                VerticalOptions="FillAndExpand">
+                                <SearchBar.Behaviors>
+                                    <behaviors:EventToCommandBehavior
+                                        Command="{Binding SearchCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Filter}, Path=Text}"
+                                        EventName="TextChanged" />
+                                </SearchBar.Behaviors>
+                            </SearchBar>
+                        </cake:PancakeView>
+                    </DataTemplate>
+                </sfListView:SfListView.HeaderTemplate>
+
+                <sfListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+
+                        <Frame
+                            Padding="0"
+                            BorderColor="LightGray"
+                            CornerRadius="5"
+                            HasShadow="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Frame
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="10"
+                                    Padding="0"
+                                    IsClippedToBounds="True">
+
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="150"
+                                        Source="{Binding Logo, Converter={StaticResource bytestoimg}}"
+                                        WidthRequest="100" />
+
+                                    <!--<Label
+                                                AbsoluteLayout.LayoutBounds="240,0,130,30"
+                                                AbsoluteLayout.LayoutFlags="None"
+                                                BackgroundColor="Red"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding Percent, StringFormat='{0}% Off'}"
+                                                TextColor="#E9EEF2"
+                                                VerticalTextAlignment="Center" />-->
+
+
+                                </Frame>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontSize="Title"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontSize="Title"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Price,StringFormat='{0:C}'}}"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    FontSize="24"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Title}" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.ColumnSpan="2"
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Description}" />
+                                <StackLayout
+                                    Grid.Row="5"
+                                    Grid.ColumnSpan="2"
+                                    Margin="10">
+
+                                    <numericupdown:SfNumericUpDown
+                                        FontSize="20"
+                                        MaximumDecimalDigits="0"
+                                        SpinButtonAlignment="Both"
+                                        TextAlignment="Center"
+                                        TextColor="Gray"
+                                        Value="{Binding Quantity}" />
+
+
+                                </StackLayout>
+                                <button:SfButton
+                                    Grid.Row="6"
+                                    Grid.ColumnSpan="2"
+                                    Margin="10"
+                                    BackgroundColor="LightGray"
+                                    BorderColor="LightGray"
+                                    BorderWidth="0.2"
+                                    Command="{Binding AddToCartCommand}"
+                                    CommandParameter="{Binding .}"
+                                    CornerRadius="4"
+                                    FontSize="25"
+                                    HasShadow="True"
+                                    HorizontalOptions="FillAndExpand"
+                                    ImageSource="shoppingcart.svg"
+                                    ImageWidth="35"
+                                    ShowIcon="True"
+                                    Text="Add To Cart"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+                </sfListView:SfListView.ItemTemplate>
+
+            </sfListView:SfListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.AdminScenarios.Stores.DashboardPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:MyOnlineStore.Application.Presentation.Views.AdminScenarios.Dashboard.Sections"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Dashboard"
+    BarBackgroundColor="#00DC7D"
+    BarTextColor="Black"
+    mc:Ignorable="d">
+    <!--  Pages can be added as references or inline  -->
+    <local:OrderDashboard Title="Order" IconImageSource="stats2.png" />
+    <!--<local:InventoryDashboard Title="Inventory" IconImageSource="stats2.png" />
+    <local:GoalDashboard Title="Goals" IconImageSource="stats2.png" />-->
+
+</TabbedPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.MyAccount.MyAccountSettings"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cardView="clr-namespace:MyOnlineStore.Application.Presentation.ViewModels.MyAccount"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    Shell.NavBarIsVisible="True"
+    mc:Ignorable="d"
+    >
+    <ContentPage.Content>
+        <tabView:SfTabView
+            BackgroundColor="White"
+            VisibleHeaderCount="2"
+            >
+            <tabView:SfTabView.SelectionIndicatorSettings>
+                <tabView:SelectionIndicatorSettings
+                    Position="Bottom"
+                    StrokeThickness="3"
+                    Color="{StaticResource Secondary}"
+                    />
+            </tabView:SfTabView.SelectionIndicatorSettings>
+            <tabView:SfTabItem
+                Title="My Cards"
+                SelectionColor="{StaticResource Primary}"
+                TitleFontAttributes="Bold"
+                TitleFontColor="Black"
+                TitleFontSize="15"
+                >
+                <tabView:SfTabItem.Content>
+                    <cardView:CardsManagementView />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            <tabView:SfTabItem
+                Title="General Info"
+                SelectionColor="{StaticResource Primary}"
+                TitleFontAttributes="Bold"
+                TitleFontColor="Black"
+                TitleFontSize="15"
+                >
+                <tabView:SfTabItem.Content>
+                    <Grid
+                        x:Name="FavoritesGrid"
+                        BackgroundColor="Green"
+                        />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+        </tabView:SfTabView>
+    </ContentPage.Content>
+</ContentPage>

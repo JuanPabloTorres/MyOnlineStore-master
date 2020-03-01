@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.LoginScenarios.RegisterAccountPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:viewmodel="clr-namespace:MyOnlineStore.Application.Presentation.ViewModels.LoginScenarios"
+    rainbow:DebugRainbow.IsDebug="False"
+    x:DataType="viewmodel:RegisterCardViewModel"
+    BackgroundColor="{StaticResource Background}"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource InputStyle}" TargetType="{x:Type inputLayout:SfTextInputLayout}" />
+            <Style BasedOn="{StaticResource BaseMaskedEdit}" TargetType="{x:Type maskedEdit:SfMaskedEdit}" />
+            <Style BasedOn="{StaticResource EntryStyle}" TargetType="{x:Type Entry}" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Label
+                AbsoluteLayout.LayoutBounds="0.5,0.01,0.8,0.1"
+                AbsoluteLayout.LayoutFlags="All"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Card Registration"
+                TextColor="{StaticResource Primary}"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+            <StackLayout
+                Margin="5"
+                AbsoluteLayout.LayoutBounds="0,60,1,0.9"
+                AbsoluteLayout.LayoutFlags="SizeProportional">
+
+                <!--  TYPE OF CARD DROPDOWN  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding TypeOfCard.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding TypeOfCard.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Type of Card">
+                    <combobox:SfComboBox
+                        ComboBoxMode="SuggestAppend"
+                        DataSource="{Binding TypeOfCards}"
+                        DropDownCornerRadius="5"
+                        HeightRequest="55"
+                        SelectedValue="{Binding TypeOfCard.Value, Mode=TwoWay}">
+                        <combobox:SfComboBox.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding TypeOfCardChangedCommand}" EventName="SelectionChanged" />
+                        </combobox:SfComboBox.Behaviors>
+                    </combobox:SfComboBox>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  CARD NUMBER ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding CardNumber.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding CardNumber.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Card Number">
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="0000-0000-0000-0000"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding CardNumber.Value, Mode=TwoWay}">
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding CardNumber.ValidateCommand}" EventName="ValueChanged" />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  CARD HOLDER NAME  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding CardHolderName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding CardHolderName.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Card Holder Name">
+                    <Entry
+                        InputTransparent="False"
+                        Keyboard="Text"
+                        Text="{Binding CardHolderName.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding CardHolderName.ValidateCommand}" EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  CARD EXPIRATION DATE  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding ExpirationDate.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding ExpirationDate.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    HelperText="Month/Year"
+                    Hint="Expiration Date">
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="00/0000"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding ExpirationDate.Value, Mode=TwoWay, Converter={StaticResource StringToShortDateConverter}}">
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding ExpirationDate.ValidateCommand}" EventName="ValueChanged" />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  SECURITY CODE  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding SecurityCode.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding SecurityCode.IsValid, Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Security Code"
+                    IsVisible="{Binding IsCreditCard}">
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding SecurityCode.Value, Mode=TwoWay}">
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior Command="{Binding SecurityCode.ValidateCommand}" EventName="ValueChanged" />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+            </StackLayout>
+            <button:SfButton
+                Margin="15,0,15,0"
+                AbsoluteLayout.LayoutBounds="0.5,0.92,0.75,0.075"
+                AbsoluteLayout.LayoutFlags="All"
+                Command="{Binding RegisterCardCommand}"
+                Style="{StaticResource BoldedThemePrimaryButton}"
+                Text="Register Card" />
+            <button:SfButton
+                AbsoluteLayout.LayoutBounds="0.5,1,0.5,0.07"
+                AbsoluteLayout.LayoutFlags="All"
+                Command="{Binding SkipToHomeCommand}"
+                Style="{StaticResource LittleTransparentButton}"
+                Text="Skip and Register Later"
+                VerticalOptions="Start"
+                VerticalTextAlignment="Start" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

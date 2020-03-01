@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.StoresScenarios.StoreHomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:converter="clr-namespace:MyOnlineStore.Application.Presentation.PresentationHelpers.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffsvgimage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:map="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:sfAvatarView="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    xmlns:sfButton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:storeViews="clr-namespace:MyOnlineStore.Application.Presentation.Views.StoresScenarios"
+    xmlns:toBuy="clr-namespace:MyOnlineStore.Application.Presentation.Views.StoresScenarios.StoreProductContent"
+    rainbow:DebugRainbow.IsDebug="False"
+    BackgroundColor="{StaticResource Secondary}"
+    Routing.Route="{StaticResource StoreHomePageRoute}"
+    Shell.TabBarIsVisible="False"
+    mc:Ignorable="d">
+    <Shell.TitleView>
+        <Grid Padding="0">
+            <ffimage:CachedImage
+                Grid.Row="0"
+                Grid.Column="0"
+                AbsoluteLayout.LayoutBounds="0,0,0.75,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Aspect="Fill"
+                BitmapOptimizations="True"
+                CacheType="All"
+                FadeAnimationForCachedImages="True"
+                HeightRequest="50"
+                HorizontalOptions="Start"
+                LoadingPlaceholder="placeholder_images.png"
+                LoadingPriority="Highest"
+                Source="{Binding StoreLogo, Converter={StaticResource bytestoimg}}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="50">
+                <ffimage:CachedImage.Transformations>
+                    <fftransformations:CircleTransformation />
+                </ffimage:CachedImage.Transformations>
+            </ffimage:CachedImage>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="{Binding Store.StoreName}"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+            <sfButton:SfButton
+                Grid.Row="0"
+                Grid.Column="2"
+                AbsoluteLayout.LayoutBounds="0.95,0,0.1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="Transparent"
+                Command="{Binding Store.MakeFavorite}"
+                CommandParameter="{Binding Store}"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                WidthRequest="30">
+                <sfButton:SfButton.Content>
+                    <ffsvgimage:SvgCachedImage
+                        Aspect="AspectFit"
+                        FadeAnimationDuration="1"
+                        FadeAnimationEnabled="True"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        IsVisible="True"
+                        Source="{Binding Store.FavoriteSource}"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                </sfButton:SfButton.Content>
+            </sfButton:SfButton>
+        </Grid>
+
+    </Shell.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteArrayToImageSourceConverter x:Key="bytestoimg" />
+            <Style
+                x:Key="WhiteCard"
+                ApplyToDerivedTypes="True"
+                CanCascade="True"
+                TargetType="{x:Type cake:PancakeView}">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Elevation" Value="0" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="BackgroundColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="Margin" Value="5,0,5,0" />
+            </Style>
+            <Style
+                x:Key="IconImage"
+                ApplyToDerivedTypes="True"
+                CanCascade="True"
+                TargetType="{x:Type ffimage:CachedImage}">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+            <Style x:Key="IconItemCardButton" TargetType="{x:Type sfButton:SfButton}">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="BackgroundColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="PressedBackgroundColor" Value="Red" />
+            </Style>
+            <Style x:Key="IconItemLabel" TargetType="{x:Type Label}">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            <Style x:Key="LinkButton" TargetType="{x:Type sfButton:SfButton}">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+            <Style
+                x:Key="NoWrapBaseLabel"
+                ApplyToDerivedTypes="True"
+                BasedOn="{StaticResource BaseLabel}"
+                CanCascade="True"
+                TargetType="{x:Type Label}">
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+            </Style>
+            <Style
+                x:Key="HourSmallLabel"
+                BasedOn="{StaticResource NoWrapBaseLabel}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="Margin" Value="5,0,0,0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <!--  Featured Item & Logo  -->
+                <storeViews:StoreContentCarouselView
+                    HorizontalOptions="FillAndExpand"
+                    Items="{Binding FeaturedItems}"
+                    VerticalOptions="FillAndExpand" />
+
+
+
+                <!--  Navigation Items  -->
+                <cake:PancakeView
+                    Margin="5,0,5,0"
+                    BackgroundColor="{StaticResource CardWhite}"
+                    CornerRadius="5"
+                    HeightRequest="80"
+                    HorizontalOptions="FillAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="*" />
+
+                        </Grid.ColumnDefinitions>
+                        <!--  CART  -->
+                        <sfButton:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Command="{Binding ShoppingManager.NavigateToCartCommand}"
+                            Style="{StaticResource IconItemCardButton}">
+                            <sfButton:SfButton.Content>
+                                <StackLayout HeightRequest="30" Spacing="0">
+                                    <Label Style="{StaticResource IconItemLabel}" Text="Cart" />
+                                    <ffimage:CachedImage Source="shoppingcart.png" Style="{StaticResource IconImage}" />
+                                </StackLayout>
+                            </sfButton:SfButton.Content>
+                        </sfButton:SfButton>
+                        <!--  SEPARATOR  -->
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource VerticalSeparator}" />
+                        <!--  OFFERS  -->
+                        <sfButton:SfButton
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Command="{Binding NavigateToOfferAndContentCommand}"
+                            Style="{StaticResource IconItemCardButton}">
+                            <sfButton:SfButton.Content>
+                                <StackLayout HeightRequest="30" Spacing="0">
+                                    <Label Style="{StaticResource IconItemLabel}" Text="Offers" />
+                                    <ffimage:CachedImage Source="tag.png" Style="{StaticResource IconImage}" />
+                                </StackLayout>
+                            </sfButton:SfButton.Content>
+                        </sfButton:SfButton>
+                        <!--  SEPARATOR  -->
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Style="{StaticResource VerticalSeparator}" />
+                        <!--  SHOPPING  -->
+                        <sfButton:SfButton
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            Command="{Binding NavigateToShopCommand}"
+                            Style="{StaticResource IconItemCardButton}">
+                            <sfButton:SfButton.Content>
+                                <StackLayout HeightRequest="30" Spacing="0">
+                                    <Label Style="{StaticResource IconItemLabel}" Text="Shop" />
+                                    <ffimage:CachedImage Source="shopbag.png" Style="{StaticResource IconImage}" />
+                                </StackLayout>
+                            </sfButton:SfButton.Content>
+                        </sfButton:SfButton>
+
+                    </Grid>
+                </cake:PancakeView>
+
+                <!--  Working Houra & Contact  -->
+                <cake:PancakeView Style="{StaticResource WhiteCard}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35" />
+                            <RowDefinition Height="1" />
+                            <RowDefinition Height="100" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <!--  CONTACT NUMBER  -->
+                        <sfButton:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="16"
+                            HorizontalOptions="CenterAndExpand"
+                            Style="{StaticResource LinkButton}"
+                            Text="777-777-7777"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <!--  SEPARATOR  -->
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource VerticalSeparator}" />
+
+                        <!--  OPEN/CLOSED  -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Open"
+                            TextColor="Blue"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <!--  SEPARATOR  -->
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Style="{StaticResource VerticalSeparator}" />
+
+                        <!--  RATING  -->
+                        <rating:SfRating
+                            x:Name="rating"
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            EnableViewRangeSelection="True"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            ItemCount="5"
+                            ItemSize="20"
+                            VerticalOptions="CenterAndExpand"
+                            Value="4" />
+
+                        <!--  SEPARATOR  -->
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="5"
+                            Style="{StaticResource HorizontalSeparator}" />
+
+                        <!--  WORKING HOURS  -->
+                        <Grid
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <!--  MONDAY  -->
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Monday" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  TUESDAY  -->
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Tuesday" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  WEDNESDAY  -->
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Wednesday" />
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  THURSDAY  -->
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Thursday" />
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  FRIDAY  -->
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Margin="10,0,0,0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Friday" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  SATURDAY  -->
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="10,0,0,0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Saturday" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+
+                            <!--  SUNDAY  -->
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Margin="10,0,0,0"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="Sunday" />
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                Style="{StaticResource HourSmallLabel}"
+                                Text="8:00AM - 6:00PM" />
+                        </Grid>
+                    </Grid>
+                </cake:PancakeView>
+
+                <!--  DESCRIPTION CARD  -->
+                <cake:PancakeView
+                    Margin="5,0,5,0"
+                    BackgroundColor="{StaticResource CardWhite}"
+                    CornerRadius="5"
+                    Elevation="10"
+                    HasShadow="True">
+                    <StackLayout Margin="5">
+                        <Label
+                            FontAttributes="Italic"
+                            FontSize="12"
+                            Text="Store's Description"
+                            TextColor="{StaticResource Primary}"
+                            TextDecorations="Underline" />
+                        <Label
+                            HorizontalTextAlignment="Start"
+                            LineBreakMode="WordWrap"
+                            Text="Lorem ipsum dolor sit amet, vel id probatus recusabo. Ius et alienum molestiae, vel ut cibo eligendi. Id sed numquam forensibus democritum, ad adhuc liberavisse duo, duo impetus facilis scribentur ex. Et nam doctus ceteros expetendis, no quod scribentur per. Meis sensibus at nam, dicat dissentiunt cu eum. Sea nostrum suscipiantur te, quo ne dicat ancillae."
+                            VerticalTextAlignment="Start" />
+                    </StackLayout>
+                </cake:PancakeView>
+                <cake:PancakeView
+                    Margin="5,0,5,5"
+                    HeightRequest="300"
+                    Style="{StaticResource WhiteCard}">
+                    <StackLayout>
+                        <Label Text="Activities/Preview of Items/LocationMap???" VerticalOptions="Start" />
+                        <!--<map:Map
+                            HasRotationEnabled="False"
+                            HasScrollEnabled="True"
+                            HasZoomEnabled="True"
+                            HorizontalOptions="CenterAndExpand"
+                            InitialCameraUpdate="-23.68, -46.87, 13, 30, 60"
+                            IsShowingUser="True"
+                            MyLocationEnabled="True"
+                            VerticalOptions="CenterAndExpand" />-->
+                    </StackLayout>
+                </cake:PancakeView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

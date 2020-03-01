@@ -1,0 +1,264 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Presentation\ViewModels\Models\**" />
+    <Compile Remove="App\**" />
+    <Compile Remove="Reports\**" />
+    <EmbeddedResource Remove="Application\Presentation\ViewModels\Models\**" />
+    <EmbeddedResource Remove="App\**" />
+    <EmbeddedResource Remove="Reports\**" />
+    <None Remove="Application\Presentation\ViewModels\Models\**" />
+    <None Remove="App\**" />
+    <None Remove="Reports\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Common\Interfaces\Factories\IUserDataStoreFactory.cs" />
+    <Compile Remove="Application\Common\Utilities\Dashboards\Record.cs" />
+    <Compile Remove="Application\Data\Factories\DataStoreFactories\UserDataStoreFactory.cs" />
+    <Compile Remove="Application\Presentation\Managers\AppUserManager.cs" />
+    <Compile Remove="Application\Presentation\PresentationHelpers\Cells\StoreCardViewCell.xaml.cs" />
+    <Compile Remove="Application\Presentation\PresentationHelpers\Dashboards\OrderServices.cs" />
+    <Compile Remove="Application\Presentation\PresentationHelpers\Dashboards\UnitTimeFilter.cs" />
+    <Compile Remove="Application\Presentation\ViewModels\Page1ViewModel.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\InventoryCollection.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\Dashboard\DashboardPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\StoresScenarios\OffersAndContent\OfferContent.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\StoresScenarios\OffersAndContent\OffersAndContent.xaml.cs" />
+    <Compile Remove="CustomAppShell.xaml.cs" />
+    <Compile Remove="Application\Data\DataStore\AzureDataStore.cs" />
+    <Compile Remove="Application\Data\DataStore\IDataStore.cs" />
+    <Compile Remove="Application\Data\DataStore\IKeyboardHelper.cs" />
+    <Compile Remove="Application\Data\DataStore\MockDataStore.cs" />
+    <Compile Remove="Application\Presentation\ViewModels\AdminScenarios\AdministratorViewModel.cs" />
+    <Compile Remove="Application\Presentation\ViewModels\ItemDetailViewModel.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\AddItemPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\DetailItempage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\Inventory.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\ReportPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\ReportsPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\AdminScenarios\Setting.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\DetailStorePage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\LoginPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\RegisterPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\UserPage.xaml.cs" />
+    <Compile Remove="Application\Presentation\Views\UserPageMaster.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Application\Presentation\PresentationHelpers\Cells\StoreCardViewCell.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\InventoryCollection.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\Dashboard\DashboardPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\StoresScenarios\OffersAndContent\OfferContent.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\StoresScenarios\OffersAndContent\OffersAndContent.xaml" />
+    <EmbeddedResource Remove="CustomAppShell.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\AddItemPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\DetailItempage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\Inventory.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\ReportPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\ReportsPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\AdminScenarios\Setting.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\DetailStorePage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\LoginPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\RegisterPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\UserPage.xaml" />
+    <EmbeddedResource Remove="Application\Presentation\Views\UserPageMaster.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Application\Common\Global\Images\burger.jpg" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CardsView" Version="2.4.0" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.3" />
+    <PackageReference Include="Microcharts" Version="0.7.1" />
+    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.3.0.34" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfMaskedEdit" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfSparkline" Version="17.4.0.40" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.4.0.44" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.4.10-beta" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.1.1.1-beta" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.0.16" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.3.0" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.3.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MyOnlineStore.Shared\MyOnlineStore.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Application\Presentation\ViewModels\AdminScenarios\Pages\RegistrationGeneralInfoView.xaml.cs">
+      <DependentUpon>RegistrationGeneralInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Presentation\Views\OrdersScenarios\Views\ProductItemCheckoutCard.xaml.cs">
+      <DependentUpon>ProductItemCheckoutCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Presentation\Views\StoresScenarios\StoreShopPage.xaml.cs">
+      <DependentUpon>StoreShopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Application\Presentation\Views\StoresScenarios\Views\StoreContentCarouselView.xaml.cs">
+      <DependentUpon>StoreContentCarouselView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Application\Presentation\MyDataTemplates\Templates\OfferTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\ViewModels\AdminScenarios\Pages\RegistrationGeneralInfoView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\ViewModels\MyAccount\CardsManagementView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Dashboard\Sections\GoalDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Dashboard\Sections\InventoryDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Dashboard\Sections\OrderDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\DashboardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\Dashboards\DashboardMenu.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\Dashboards\GoalsDashboard.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\Dashboards\InventoryDashboards.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\EmployeeStepsView\ConfigureEmployeePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\EmployeeStepsView\EmployeeDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\EmployeeStepsView\EmployeeHomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\EmployeeStepsView\NewEmployeePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\EmployeeStepsView\SearchEmployeePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\MyStoresPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OffersAndContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OfferStepView\OffersHomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OfferStepView\OfferTitleAndDescriptionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OfferStepView\SelectDateOfferPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OfferStepView\SelectProductToSetOfferPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\AdminScenarios\Stores\OfferStepView\SetOfferPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\MyAccount\MyAccountSettings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\Notification\JobsNotification.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\OrdersScenarios\CheckoutListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\OrdersScenarios\Views\ProductItemCheckoutCard.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\StoresScenarios\OffersAndContent\OfferAndContentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\StoresScenarios\StoreHomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\StoresScenarios\StoreProductContent\StoreProductsToBuy.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\TemplatesViews\Popups\HelpContentPopUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\TemplatesViews\Popups\StoreInstructionContentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\WorkSpace\DetailWorkSpace.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Application\Presentation\Views\WorkSpace\WorkStore.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Data\Factories\DataStoreFactories\" />
+  </ItemGroup>
+</Project>

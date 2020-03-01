@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Views.StoreItemView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    rainbow:DebugRainbow.IsDebug="False"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <Frame
+            Margin="0,5,0,5"
+            Padding="2"
+            CornerRadius="8"
+            HasShadow="True">
+            <StackLayout BackgroundColor="White" Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <abstractions:CircleImage
+                        Margin="10"
+                        Aspect="Fill"
+                        HeightRequest="100"
+                        HorizontalOptions="StartAndExpand"
+                        Source="Red_Table_Main_Logo.jpg"
+                        WidthRequest="100" />
+
+                    <Label
+                        Margin="10"
+                        FontSize="Title"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding StoreName}"
+                        TextColor="{StaticResource TextColor}" />
+
+                </StackLayout>
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label
+                        FontAttributes="Bold"
+                        Text="{Binding Description}"
+                        TextColor="{StaticResource TextColor}" />
+                </StackLayout>
+                <Label
+                    HorizontalOptions="End"
+                    Text="{Binding StoreType}"
+                    TextColor="{StaticResource TextColor}" />
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="MyOnlineStore.Application.Presentation.ViewModels.MyAccount.CardsManagementView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:cardViewModel="clr-namespace:MyOnlineStore.Application.Common.Interfaces.IViewModel"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    mc:Ignorable="d"
+    >
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="5,0,5,0"
+                BindingContext="{Binding CardViewModel}"
+                >
+                <Label
+                    IsVisible="False"
+                    Text="{Binding CardId}"
+                    />
+
+                <inputLayout:SfTextInputLayout
+                    Hint="My Cards"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <combobox:SfComboBox
+                        x:Name="comboBoxCards"
+                        DataSource="{Binding User.UserCards,
+                                             Mode=TwoWay}"
+                        DisplayMemberPath="Number"
+                        SelectedItem="{Binding SelectedUserCard,
+                                               Mode=TwoWay}"
+                        SelectedValuePath="Number"
+                        ShowDropDownFooterView="True"
+                        Watermark="My Cards"
+                        >
+                        <combobox:SfComboBox.DropDownHeaderView>
+                            <Grid
+                                BackgroundColor="{StaticResource LightSilver}"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                >
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="5,0,0,0"
+                                    FontAttributes="Bold"
+                                    Text="CardHolderName"
+                                    VerticalOptions="Center"
+                                    />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    Text="Card Number"
+                                    VerticalOptions="Center"
+                                    />
+                            </Grid>
+                        </combobox:SfComboBox.DropDownHeaderView>
+                        <combobox:SfComboBox.DropDownFooterView>
+                            <Grid
+                                Padding="0,1,0,0"
+                                BackgroundColor="Black"
+                                >
+                                <sfbutton:SfButton
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    BackgroundColor="White"
+                                    Command="{Binding NewCardCommand}"
+                                    CommandParameter="{Binding Source={x:Reference comboBoxCards}}"
+                                    CornerRadius="0"
+                                    Style="{StaticResource LittleTransparentButton}"
+                                    Text="New Card"
+                                    TextColor="Blue"
+                                    />
+                            </Grid>
+                        </combobox:SfComboBox.DropDownFooterView>
+                        <combobox:SfComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        >
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Padding="5,0,0,0"
+                                            Text="{Binding CardHolderName}"
+                                            VerticalOptions="Center"
+                                            />
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding Number}"
+                                            VerticalOptions="Center"
+                                            />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </combobox:SfComboBox.ItemTemplate>
+                        <combobox:SfComboBox.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding CardSelectionChangedCommand}"
+                                EventName="SelectionChanged"
+                                />
+                        </combobox:SfComboBox.Behaviors>
+                    </combobox:SfComboBox>
+                </inputLayout:SfTextInputLayout>
+                <Grid>
+                    <sfbutton:SfButton
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Command="{Binding AddOrUpdateCardCommand}"
+                        Style="{StaticResource ThemePrimaryButtonLightText}"
+                        Text="Save Card"
+                        />
+                    <sfbutton:SfButton
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Style="{StaticResource ThemePrimaryButtonLightText}"
+                        Text="Delete Card"
+                        />
+                </Grid>
+                <!--  HOLDER NAME  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding CardHolderName.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding CardHolderName.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Card Holder Name"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <Entry Text="{Binding CardHolderName.Value, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding CardHolderName.ValidateCommand}"
+                                EventName="TextChanged"
+                                />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+                <!--  CardNumber  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding CardNumber.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding CardNumber.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Card Number"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="0000-0000-0000-0000"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding CardNumber.Value,
+                                        Mode=TwoWay}"
+                        >
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding CardNumber.ValidateCommand}"
+                                EventName="ValueChanged"
+                                />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+                <!--  Expiration Date  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding ExpirationDate.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding ExpirationDate.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Expiration Date"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        Mask="00/0000"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding ExpirationDate.Value,
+                                        Mode=TwoWay,
+                                        Converter={StaticResource StringToShortDateConverter}}"
+                        >
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding ExpirationDate.ValidateCommand}"
+                                EventName="ValueChanged"
+                                />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+                <!--  Type of card  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding TypeOfCard.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding TypeOfCard.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Type of Card"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <combobox:SfComboBox
+                        ComboBoxMode="SuggestAppend"
+                        DataSource="{Binding TypeOfCards}"
+                        DropDownCornerRadius="5"
+                        HeightRequest="55"
+                        SelectedValue="{Binding TypeOfCard.Value,
+                                                Mode=TwoWay}"
+                        >
+                        <combobox:SfComboBox.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding TypeOfCardChangedCommand}"
+                                EventName="SelectionChanged"
+                                />
+                        </combobox:SfComboBox.Behaviors>
+                    </combobox:SfComboBox>
+                </inputLayout:SfTextInputLayout>
+                <!--  SECURITY CODE  -->
+                <inputLayout:SfTextInputLayout
+                    ErrorText="{Binding SecurityCode.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    HasError="{Binding SecurityCode.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Security Code"
+                    IsVisible="{Binding IsCreditCard}"
+                    Style="{StaticResource InputStyle}"
+                    >
+                    <maskedEdit:SfMaskedEdit
+                        Keyboard="Numeric"
+                        MaskType="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding SecurityCode.Value,
+                                        Mode=TwoWay}"
+                        >
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding SecurityCode.ValidateCommand}"
+                                EventName="ValueChanged"
+                                />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

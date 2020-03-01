@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MyOnlineStore.Application.Presentation.Views.LoginScenarios.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:animform="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rainbow="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+    rainbow:DebugRainbow.IsDebug="False"
+    NavigationPage.HasBackButton="False"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material"
+    mc:Ignorable="d"
+    >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                BasedOn="{StaticResource InputStyle}"
+                TargetType="{x:Type inputLayout:SfTextInputLayout}"
+                />
+            <Style
+                BasedOn="{StaticResource BaseMaskedEdit}"
+                TargetType="{x:Type maskedEdit:SfMaskedEdit}"
+                />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <RelativeLayout BackgroundColor="{StaticResource Background}">
+            <!--  Header Welcome  -->
+            <AbsoluteLayout
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=0.25}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.8}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0.1}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0.025}"
+                >
+                <!--  Header Message  -->
+                <cake:PancakeView
+                    AbsoluteLayout.LayoutBounds="0.5,0,1,0.2"
+                    AbsoluteLayout.LayoutFlags="All"
+                    >
+                    <Label
+                        FontSize="Large"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Welcome"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="CenterAndExpand"
+                        />
+                </cake:PancakeView>
+                <!--  Logo  -->
+                <abstractions:CircleImage
+                    AbsoluteLayout.LayoutBounds="0.5,1,1,0.8"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Aspect="AspectFill"
+                    HeightRequest="125"
+                    HorizontalOptions="CenterAndExpand"
+                    Source="logo_placeholder"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="125"
+                    />
+            </AbsoluteLayout>
+
+            <!--  Logo  -->
+
+            <AbsoluteLayout
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=0.1}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.2}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0.4}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0.35}"
+                >
+                <animform:AnimationView
+                    AbsoluteLayout.LayoutBounds="0,1,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Animation="dots_anim_full_Navy.json"
+                    IsPlaying="True"
+                    IsVisible="{Binding IsBusy}"
+                    Loop="True"
+                    />
+            </AbsoluteLayout>
+
+            <!--  Login Entry  -->
+            <AbsoluteLayout
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=0.3}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.9}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0.05}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0.45}"
+                >
+                <!--  EMAIL ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,0.45"
+                    AbsoluteLayout.LayoutFlags="All"
+                    ContainerBackgroundColor="{StaticResource CardWhite}"
+                    ContainerType="Outlined"
+                    ErrorColor="{StaticResource TeslaRed}"
+                    ErrorText="{Binding Email.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    FocusedColor="{StaticResource Primary}"
+                    HasError="{Binding Email.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Email"
+                    ReserveSpaceForAssistiveLabels="True"
+                    UnfocusedColor="{StaticResource Primary}"
+                    >
+
+                    <maskedEdit:SfMaskedEdit
+                        InputTransparent="False"
+                        Keyboard="Text"
+                        ValidationMode="LostFocus"
+                        Value="{Binding Email.Value,
+                                        Mode=TwoWay}"
+                        >
+                        <maskedEdit:SfMaskedEdit.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding Email.ValidateCommand}"
+                                EventName="ValueChanged"
+                                />
+                        </maskedEdit:SfMaskedEdit.Behaviors>
+                    </maskedEdit:SfMaskedEdit>
+                </inputLayout:SfTextInputLayout>
+
+                <!--  PASSWORD ENTRY  -->
+                <inputLayout:SfTextInputLayout
+                    AbsoluteLayout.LayoutBounds="0,1,1,0.5"
+                    AbsoluteLayout.LayoutFlags="All"
+                    CharMaxLength="16"
+                    ContainerBackgroundColor="{StaticResource CardWhite}"
+                    ContainerType="Outlined"
+                    EnablePasswordVisibilityToggle="True"
+                    ErrorColor="{StaticResource TeslaRed}"
+                    ErrorText="{Binding Password.Errors,
+                                        Converter={StaticResource FirstValidationErrorConverter}}"
+                    FocusedColor="{StaticResource Primary}"
+                    HasError="{Binding Password.IsValid,
+                                       Converter={StaticResource NegateBoolConverter}}"
+                    Hint="Password"
+                    ShowCharCount="True"
+                    UnfocusedColor="{StaticResource Primary}"
+                    >
+                    <Entry
+                        IsPassword="True"
+                        Keyboard="Text"
+                        Text="{Binding Password.Value,
+                                       Mode=TwoWay}"
+                        >
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding Password.ValidateCommand}"
+                                EventName="TextChanged"
+                                />
+                        </Entry.Behaviors>
+                    </Entry>
+                </inputLayout:SfTextInputLayout>
+
+            </AbsoluteLayout>
+
+            <!--  Login Button  -->
+            <AbsoluteLayout
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Width,
+                                                                       Factor=0.12}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=0.8}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0.1}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0.8}"
+                >
+
+                <button:SfButton
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="0,1,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Command="{Binding LoginCommand}"
+                    Style="{StaticResource BoldedThemePrimaryButton}"
+                    Text="Login"
+                    />
+            </AbsoluteLayout>
+
+            <!--  Forgot Pass & Create Account Button  -->
+            <AbsoluteLayout
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Height,
+                                                                  Factor=0.9}"
+                >
+                <button:SfButton
+                    AbsoluteLayout.LayoutBounds="0,0,0.45,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Command="{Binding ForgotPasswordCommand}"
+                    HorizontalOptions="EndAndExpand"
+                    Style="{StaticResource LittleTransparentButton}"
+                    Text="Forgot Password?"
+                    />
+
+                <Label
+                    AbsoluteLayout.LayoutBounds="0.5,0,0.05,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    FontSize="22"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="|"
+                    VerticalOptions="Start"
+                    />
+
+                <button:SfButton
+                    AbsoluteLayout.LayoutBounds="1,1,0.45,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Command="{Binding NavigateToRegisterCommand}"
+                    HorizontalOptions="StartAndExpand"
+                    Style="{StaticResource LittleTransparentButton}"
+                    Text="Create An Account"
+                    />
+            </AbsoluteLayout>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

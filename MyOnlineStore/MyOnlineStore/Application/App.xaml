@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="MyOnlineStore.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MyOnlineStore.Application.Presentation.Behaviors"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:converters="clr-namespace:MyOnlineStore.Application.Presentation.PresentationHelpers.Converters"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffsvgimage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:maskedEdit="clr-namespace:Syncfusion.XForms.MaskedEdit;assembly=Syncfusion.SfMaskedEdit.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfcombobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    mc:Ignorable="d">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  COLORS  -->
+            <x:Boolean x:Key="NotBar">False</x:Boolean>
+            <Color x:Key="Mint">#4ea68e</Color>
+            <Color x:Key="MintLight">#49D19D</Color>
+            <Color x:Key="NavyBlue">#313d4e</Color>
+            <Color x:Key="NavyLight">#43536c</Color>
+            <Color x:Key="TextColor">#D3D3D3</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="ErrorColor">#ff5252</Color>
+            <Color x:Key="CardWhite">#FEFCFF</Color>
+            <Color x:Key="FavoriteGold">#FFD700</Color>
+            <Color x:Key="TeslaRed">#CC0000</Color>
+            <Color x:Key="GrayTransparent">#000035</Color>
+            <Color x:Key="LightSilver">#D1D3D4</Color>
+            <Color x:Key="MaterialOrange">#FFAF50</Color>
+            <Color x:Key="AmazonOrange">#FF9900</Color>
+            <Color x:Key="Blumine">#1D556F</Color>
+            <Color x:Key="EasternBlue">#288FB4</Color>
+            <Color x:Key="Gallery">#F0F0F0</Color>
+            <Color x:Key="Scarlet">#FA360A</Color>
+
+
+            <Color x:Key="Primary">#1D556F</Color>
+            <Color x:Key="PrimaryLight">#288FB4</Color>
+            <Color x:Key="Secondary">#313d4e</Color>
+            <Color x:Key="Background">#F0F0F0</Color>
+            <Color x:Key="Alternative">#FA360A</Color>
+            <!--<cake:GradientStopCollection x:Key="Rainbow">
+                <cake:GradientStop
+                    Offset="0"
+                    Color="{StaticResource ShadowWhitePrimary}"
+                    />
+                <cake:GradientStop
+                    Offset="0.2"
+                    Color="{StaticResource ShadowWhitePrimary}"
+                    />
+                <cake:GradientStop
+                    Offset="0.4"
+                    Color="{StaticResource ShadowWhitePrimary}"
+                    />
+                <cake:GradientStop
+                    Offset="0.6"
+                    Color="{StaticResource ShadowDarkPrimary}"
+                    />
+                <cake:GradientStop
+                    Offset="0.8"
+                    Color="{StaticResource ShadowDarkPrimary}"
+                    />
+                <cake:GradientStop
+                    Offset="1"
+                    Color="{StaticResource ShadowDarkPrimary}"
+                    />
+            </cake:GradientStopCollection>-->
+            <!--  FONTS  -->
+            <OnPlatform x:Key="SmallSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="11" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="12" />
+            </OnPlatform>
+            <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="14" />
+            </OnPlatform>
+            <OnPlatform x:Key="XXLargeSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="22" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="22" />
+            </OnPlatform>
+
+            <!--  ******************************* STYLES *******************************  -->
+            <!--  INPUT LAYOUT STYLES  -->
+            <Style x:Key="InputStyle" TargetType="{x:Type inputLayout:SfTextInputLayout}">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="ContainerBackgroundColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="ContainerType" Value="Outlined" />
+                <Setter Property="ErrorColor" Value="{StaticResource TeslaRed}" />
+                <Setter Property="UnfocusedColor" Value="{StaticResource PrimaryLight}" />
+                <Setter Property="FocusedColor" Value="{StaticResource Primary}" />
+            </Style>
+            <!--  ENTRY STYLES  -->
+            <Style x:Key="EntryStyle" TargetType="{x:Type Entry}">
+                <Setter Property="InputTransparent" Value="False" />
+            </Style>
+            <!--  MASKED EDIT STYLES  -->
+            <Style x:Key="BaseMaskedEdit" TargetType="{x:Type maskedEdit:SfMaskedEdit}">
+                <Setter Property="ValidationMode" Value="LostFocus" />
+                <Setter Property="MaskType" Value="Text" />
+            </Style>
+
+            <!--  BUTTONS STYLES  -->
+            <Style x:Key="BaseButton" TargetType="{x:Type button:SfButton}">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style
+                x:Key="LightPrimaryButton"
+                BasedOn="{StaticResource BaseButton}"
+                TargetType="{x:Type button:SfButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightSilver}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+            </Style>
+            <Style
+                x:Key="ThemePrimaryButtonLightText"
+                BasedOn="{StaticResource BaseButton}"
+                TargetType="{x:Type button:SfButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+            <Style
+                x:Key="LittleTransparentButton"
+                BasedOn="{StaticResource BaseButton}"
+                TargetType="{x:Type button:SfButton}">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="{StaticResource SmallSize}" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+            <Style
+                x:Key="BoldedThemePrimaryButton"
+                BasedOn="{StaticResource ThemePrimaryButtonLightText}"
+                TargetType="{x:Type button:SfButton}">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="BaseLabel" TargetType="{x:Type Label}">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+
+            </Style>
+
+            <!--  LISTVIEW  -->
+            <Style x:Key="StoreClientListView" TargetType="{x:Type listview:SfListView}">
+                <Setter Property="SelectionBackgroundColor" Value="Transparent" />
+                <Setter Property="SelectionGesture" Value="Tap" />
+                <Setter Property="SelectionMode" Value="Single" />
+                <Setter Property="SwipeThreshold" Value="50" />
+                <Setter Property="AllowSwiping" Value="True" />
+                <Setter Property="AutoFitMode" Value="DynamicHeight" />
+                <Setter Property="IsScrollBarVisible" Value="True" />
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
+
+                <Setter Property="LeftSwipeTemplate">
+                    <Setter.Value>
+                        <cake:PancakeView
+                            Margin="5"
+                            BackgroundColor="{StaticResource FavoriteGold}"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <ffsvgimage:SvgCachedImage
+                                Aspect="AspectFit"
+                                FadeAnimationDuration="1"
+                                FadeAnimationEnabled="True"
+                                HeightRequest="45"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="True"
+                                Source="empty_star.svg"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="45" />
+                        </cake:PancakeView>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  LABEL  -->
+            <Style x:Key="HeaderLabel" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryLight}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource XXLargeSize}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+            </Style>
+
+            <!--  BOXVIEW SEPARATOR  -->
+            <Style x:Key="VerticalSeparator" TargetType="{x:Type BoxView}">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+            </Style>
+            <Style
+                x:Key="HorizontalSeparator"
+                BasedOn="{StaticResource VerticalSeparator}"
+                TargetType="{x:Type BoxView}">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Margin" Value="5,0,5,0" />
+            </Style>
+
+            <!--  CONVERTERS  -->
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <converters:StringToIntConverter x:Key="StringToInt" />
+            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <converters:StoresToStoreNameConverter x:Key="StoresToStoreName" />
+            <converters:BoolToStringConverter x:Key="BoolStringConverter" />
+            <converters:SelectionChangedArgsConverter x:Key="SelectionChangedArgsConverter" />
+            <converters:GuidStringConverter x:Key="GuidStringConverter" />
+            <converters:UIntToStringConverter x:Key="UIntToStringConverter" />
+            <converters:BindingToStringValue x:Key="BindingToStringValue" />
+            <converters:NegateBoolConverter x:Key="NegateBoolConverter" />
+            <converters:StringToFullDateConverter x:Key="StringToFullDateConverter" />
+            <converters:StringToShortDateConverter x:Key="StringToShortDateConverter" />
+            <converters:FloatToStringConverter x:Key="FloatToStringConverter" />
+            <converters:ToProductItemPresenterConverter x:Key="ToProductItemPresenterConverter" />
+            <converters:ValidGreaterThanTimeConverter x:Key="ValidGreaterThanTimeConverter" />
+            <converters:ValidLessThanTimeConverter x:Key="ValidLessThanTimeConverter" />
+
+            <!--  ROUTES  -->
+            <x:String x:Key="InventoryListPageRoute">InventoryListPage</x:String>
+            <x:String x:Key="ProductItemDetailPageRoute">ProductItemDetailPage</x:String>
+            <x:String x:Key="StoreHomePageRoute">StoreHomePage</x:String>
+            <x:String x:Key="DashboardPageRoute">StoreDashboard</x:String>
+            <x:String x:Key="CheckoutListPageRoute">CheckoutPage</x:String>
+            <x:String x:Key="StoreShopPageRoute">StoreShopPage</x:String>
+            <x:String x:Key="HomePageRoute">HomePage</x:String>
+            <x:String x:Key="AdminHomePageRoute">AdminHomePage</x:String>
+            <x:String x:Key="HomeContentPageRoute">HomeContentPage</x:String>
+            <x:String x:Key="OffersHomePageRoute">OffersHomePage</x:String>
+            <x:String x:Key="EmployeeHomePageRoute">EmployeeHomePage</x:String>
+            <x:String x:Key="RegisterPageRoute">RegisterPage</x:String>
+            <x:String x:Key="ConfigureEmployeePageRoute">ConfigureEmployeePage</x:String>
+            <x:String x:Key="EmployeeDetailViewRoute">EmployeeDetailView</x:String>
+            <x:String x:Key="UpdatePicturePageRoute">UpdatePicturePage</x:String>
+            <x:String x:Key="DetailWorkSpaceRoute">DetailWorkSpace</x:String>
+            <x:String x:Key="OfferAndContentViewRoute">OfferAndContentView</x:String>
+            <x:String x:Key="StoreProductsToBuyRoute">StoreProductsToBuy</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
