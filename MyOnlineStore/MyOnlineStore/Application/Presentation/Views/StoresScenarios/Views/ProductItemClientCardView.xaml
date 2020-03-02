@@ -83,7 +83,7 @@
                                 BackgroundColor="Red"
                                 FontAttributes="Bold"
                                 HorizontalTextAlignment="Center"
-                                IsVisible="{Binding HassOffer}"
+                                IsVisible="{Binding HasOffer}"
                                 Text="Has Offer "
                                 TextColor="#E9EEF2"
                                 VerticalTextAlignment="Center" />

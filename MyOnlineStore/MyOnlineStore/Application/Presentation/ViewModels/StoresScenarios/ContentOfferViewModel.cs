@@ -65,7 +65,7 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
             //var offers = ProductItemDataStore.GetOfferOfStore(App.ApplicationManager.CurrenstStoreGuid.ToString());
 
 
-            var products = ProductItemDataStore.GetInventoryForStore(StoreId);
+           // var products = ProductItemDataStore.GetInventoryForStore(StoreId);
             //StoreOffers = new ObservableCollection<Offer>(offers);
             //SetDataToPresenter(StoreOffers);
           

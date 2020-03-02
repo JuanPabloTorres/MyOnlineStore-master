@@ -40,7 +40,7 @@ namespace MyOnlineStore.Shared.Factories.OrderFactory
         {
             Order order;
 
-            if(store.Id != Guid.Empty)
+            if(store.Id != Guid.Empty || !string.IsNullOrEmpty(store.Id.ToString()))
             {
                 order = new Order
                 {
