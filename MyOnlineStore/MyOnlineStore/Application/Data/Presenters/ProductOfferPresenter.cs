@@ -48,19 +48,19 @@ namespace MyOnlineStore.Application.Data.Presenters
 
         public ICommand AddToCartCommand { get; set; }
 
-        public ProductOfferPresenter(Offer ItemOffer,ShoppingManager shoppingManager)
+        public ProductOfferPresenter(ProductItem ItemOffer,ShoppingManager shoppingManager)
         {
-            this.Title = ItemOffer.Title;
-            this.Description = ItemOffer.Description;
-            this.StartDate = ItemOffer.StartDate;
-            this.EndDate = ItemOffer.EndDate;
-            this.Id = ItemOffer.Id;
-            this.MyProductId = ItemOffer.MyProductId;
-            this.StoreId = ItemOffer.StoreId;
+            this.Title = ItemOffer.ProductOffer.Title;
+            this.Description = ItemOffer.ProductOffer.Description;
+            this.StartDate = ItemOffer.ProductOffer.StartDate;
+            this.EndDate = ItemOffer.ProductOffer.EndDate;
+            this.Id = ItemOffer.MyOfferId;
+            this.MyProductId = ItemOffer.Id;
+            this.StoreId = ItemOffer.MyStoreId;
            // this.Product = ItemOffer.Product;
-            this.TotalPrice = ItemOffer.TotalPrice;
-            this.BuyOne = ItemOffer.BuyOne;
-            this.Percent = ItemOffer.Percent;
+            this.TotalPrice = ItemOffer.ProductOffer.OfferPrice;
+        
+            this.Percent = ItemOffer.ProductOffer.Percent;
             Quantity = 0;
 
             this.ShoppingManager = shoppingManager;

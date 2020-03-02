@@ -10,8 +10,8 @@ using MyOnlineStore.MobileAppService.Context;
 namespace MyOnlineStore.MobileAppService.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200301224133_2020_01_03_1.00")]
-    partial class _2020_01_03_100
+    [Migration("20200301235825_2020_01_02_1.00")]
+    partial class _2020_01_02_100
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,15 +161,15 @@ namespace MyOnlineStore.MobileAppService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7f76d5b5-22cc-4630-9443-0b0b0f16ba8b"),
-                            ConcurrencyStamp = "6ab3a912-309f-472c-b499-87694b2eabb0",
+                            Id = new Guid("91f3c156-8313-4d37-aadc-7da37ed229b3"),
+                            ConcurrencyStamp = "45f4ce28-2cd5-4b4c-985a-a9adb1f0cac3",
                             IsAlive = true,
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("d0adbaf9-05d3-4bfb-911a-98d11c977c0a"),
-                            ConcurrencyStamp = "31f9390f-b18b-43ef-8843-59b806305ea2",
+                            Id = new Guid("56f87f8b-cc8d-4199-8dfd-1d5ac2aff712"),
+                            ConcurrencyStamp = "1092cc0c-d94d-4d87-9a29-3311b688d9b3",
                             IsAlive = true,
                             Name = "Employee"
                         });
@@ -524,7 +524,7 @@ namespace MyOnlineStore.MobileAppService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StoreOffers");
+                    b.ToTable("Offers");
                 });
 
             modelBuilder.Entity("MyOnlineStore.Shared.Models.Purchases.OrderStatus", b =>

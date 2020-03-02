@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using MyOnlineStore.Entities.Models.Purchases;
 
 namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
 {
@@ -18,8 +19,8 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
    public  class ContentOfferViewModel:BaseViewModel,IOfferContentViewModel
     {
 
-        private ObservableCollection<Offer> storeoffers;
-        public ObservableCollection<Offer> StoreOffers
+        private ObservableCollection<ProductItem> storeoffers;
+        public ObservableCollection<ProductItem> StoreOffers
         {
             get { return storeoffers; }
             set { storeoffers = value;
@@ -44,8 +45,8 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
             get { return storeid; }
             set { storeid = value;
 
-                var offers = ProductItemDataStore.GetOfferOfStore(StoreId);
-                StoreOffers = new ObservableCollection<Offer>(offers);
+                var productItems = ProductItemDataStore.GetInventoryForStore(StoreId);
+                StoreOffers = new ObservableCollection<ProductItem>(productItems);
                 SetDataToPresenter(StoreOffers);
             }
         }
@@ -63,6 +64,8 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
 
             //var offers = ProductItemDataStore.GetOfferOfStore(App.ApplicationManager.CurrenstStoreGuid.ToString());
 
+
+            var products = ProductItemDataStore.GetInventoryForStore(StoreId);
             //StoreOffers = new ObservableCollection<Offer>(offers);
             //SetDataToPresenter(StoreOffers);
           
@@ -70,7 +73,7 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
 
         }
 
-        void SetDataToPresenter(ObservableCollection<Offer> OfferData)
+        void SetDataToPresenter(ObservableCollection<ProductItem> OfferData)
         {
             ProductOfferPresenters = new ObservableCollection<ProductOfferPresenter>();
             foreach (var item in OfferData)

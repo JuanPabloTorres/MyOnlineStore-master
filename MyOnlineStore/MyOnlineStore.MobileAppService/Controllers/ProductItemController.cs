@@ -102,14 +102,11 @@ namespace MyOnlineStore.MobileAppService.Controllers
             var result = _ProductItemRepo.InsertProductOffer(item);
             if (result)
             {
-               var prodtoUpdate = _ProductItemRepo.Get(item.MyProductId);
+               //var prodtoUpdate = _ProductItemRepo.Get(item.MyProductId);
 
-                var temp = prodtoUpdate.Price;
-                prodtoUpdate.RealPrice = temp;
-                prodtoUpdate.Price = (float)item.BuyOne;
-              
+               // prodtoUpdate.MyOfferId = item.Id;              
 
-                _ProductItemRepo.Update(prodtoUpdate);
+               // _ProductItemRepo.Update(prodtoUpdate);
             }
 
             return result;

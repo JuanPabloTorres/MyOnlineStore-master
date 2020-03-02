@@ -47,7 +47,7 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
             //TODO: Recieve a signal of quantity
             //API will send a signal with an updated products quantity
             ShoppingManager.AvailableItems.ForEach((product) =>
-                Products.Add(ProductsPresenterFactory.CreateProductBuyPresenter(product))
+                Products.Add(ProductsPresenterFactory.CreateProductBuyPresenterWithOffer(product))
             );
         }
     }

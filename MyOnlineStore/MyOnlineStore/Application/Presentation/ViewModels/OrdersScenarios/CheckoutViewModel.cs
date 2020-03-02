@@ -65,7 +65,7 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.OrdersScenarios
                 {
                     var itemPresenter = Startup.ServiceProvider
                         .GetService<IProductItemBuyPresenterFactory>()
-                        .CreateProductBuyPresenter(
+                        .CreateProductBuyPresenterWithOffer(
                             product: item.ProductItem,
                             selectQuantity: item.QuantityOfItem,
                             totalprice: item.ProductItem.Price * item.QuantityOfItem

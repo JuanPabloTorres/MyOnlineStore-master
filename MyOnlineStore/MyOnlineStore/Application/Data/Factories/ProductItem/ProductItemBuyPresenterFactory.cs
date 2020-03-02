@@ -20,9 +20,11 @@ namespace MyOnlineStore.Application.Data.Factories.ProductItemFactories
             return new ProductItemPresenter(productPresenter);
         }
 
-        public ProductItemPresenter CreateProductBuyPresenter(ProductItem product, uint selectQuantity = 0, float totalprice = 0.0f)
+        public ProductItemPresenter CreateProductBuyPresenterWithOffer(ProductItem product, uint selectQuantity = 0, float totalprice = 0.0f)
         {
-            return new ProductItemPresenter(product, selectQuantity, totalprice);
+            ProductItemPresenter productpresenter = new ProductItemPresenter(product, selectQuantity, totalprice);
+            productpresenter.Price = product.HasOffer() ? product.ProductOffer!.OfferPrice : product.Price;
+            return productpresenter;
         }
     }
 }

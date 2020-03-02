@@ -1,4 +1,5 @@
 ﻿using MyOnlineStore.Entities.Models.Purchases;
+using MyOnlineStore.Shared.Models.Purchases;
 using System;
 
 namespace MyOnlineStore.Entities.Models.Models.DTOs
@@ -20,6 +21,8 @@ namespace MyOnlineStore.Entities.Models.Models.DTOs
         public string Category { get; set; } = string.Empty;
         public Guid MyStoreId { get; set; }
 
+        public Offer? ProductOffer { get; set; }
+
         public ProductItemDTO()
         {
         }
@@ -34,6 +37,7 @@ namespace MyOnlineStore.Entities.Models.Models.DTOs
             Quantity = productItem.Quantity;
             Category = productItem.Category;
             MyStoreId = productItem.MyStoreId;
+            ProductOffer = productItem.ProductOffer;
         }
 
         public ProductItem ToProductItem()
@@ -46,7 +50,8 @@ namespace MyOnlineStore.Entities.Models.Models.DTOs
                 Name = this.Name,
                 Price = this.Price,
                 Quantity = this.Quantity,
-                Category = this.Category
+                Category = this.Category,
+                ProductOffer = this.ProductOffer
             };
         }
     }

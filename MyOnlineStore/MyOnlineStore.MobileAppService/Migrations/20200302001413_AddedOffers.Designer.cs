@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyOnlineStore.MobileAppService.Context;
 
 namespace MyOnlineStore.MobileAppService.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20200302001413_AddedOffers")]
+    partial class AddedOffers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,6 +120,9 @@ namespace MyOnlineStore.MobileAppService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
@@ -157,15 +162,15 @@ namespace MyOnlineStore.MobileAppService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("08311449-2b94-44eb-9b3c-0a1b4e02002d"),
-                            ConcurrencyStamp = "9f3eefcb-72cc-49be-aa23-64823d26c356",
+                            Id = new Guid("4974d653-8b78-441b-99db-926a7d8031ae"),
+                            ConcurrencyStamp = "84b4cb05-d17f-4751-b36b-5ac759c5f685",
                             IsAlive = true,
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("a766556d-5baf-4d36-9256-dd42d1373f4a"),
-                            ConcurrencyStamp = "6f56917f-50d4-40d5-b61b-8af8a3bf5922",
+                            Id = new Guid("139f3f4e-600b-468d-b0b6-bde20b34bee8"),
+                            ConcurrencyStamp = "104752cf-86ea-4e0c-a66c-70d284d3fc62",
                             IsAlive = true,
                             Name = "Employee"
                         });

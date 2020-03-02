@@ -25,7 +25,7 @@ namespace MyOnlineStore.Application.Presentation.Managers
     {
         private Store currentShoppingStore;
         private uint cartItemsQuantity = uint.MinValue;
-        private float cartTotalPrice = 0.0f;
+        private double cartTotalPrice = 0.0;
         private ObservableCollection<ProductItemPresenter> cart = new ObservableCollection<ProductItemPresenter>();
 
         private readonly int PlusPlus = 1;
@@ -56,7 +56,7 @@ namespace MyOnlineStore.Application.Presentation.Managers
         /// <summary>
         /// Total Price of the Cart
         /// </summary>
-        public float CartTotalPrice
+        public double CartTotalPrice
         {
             get => cartTotalPrice;
             set { cartTotalPrice = value; RaisePropertyChanged(() => CartTotalPrice); }
@@ -181,7 +181,7 @@ namespace MyOnlineStore.Application.Presentation.Managers
                 {
                     foreach (var item in orderItems)
                     {
-                        var itemPresenter = ProductItemBuyPresenterFactory.CreateProductBuyPresenter(
+                        var itemPresenter = ProductItemBuyPresenterFactory.CreateProductBuyPresenterWithOffer(
                                 product: item.ProductItem,
                                 selectQuantity: item.QuantityOfItem,
                                 totalprice: item.ProductItem.Price * item.QuantityOfItem
@@ -204,12 +204,25 @@ namespace MyOnlineStore.Application.Presentation.Managers
             CartItemsQuantity = (uint)CurrentOrder.OrderItems.Sum(orderItem => orderItem.QuantityOfItem);
 
             //Update Total Price of Cart
-            CartTotalPrice = CurrentOrder.OrderItems.Sum(ordersitems =>
-                ordersitems.ProductItem.Price * ordersitems.QuantityOfItem
-            );
+            //CartTotalPrice = CurrentOrder.OrderItems.Sum(ordersitems =>
+            //    ordersitems.ProductItem.Price * ordersitems.QuantityOfItem
+            //);
 
-            
-           
+            CartTotalPrice = CurrentOrder.OrderItems.Sum(orderitems => {
+                double sum = double.NaN;
+
+                if (orderitems.ProductItem.HasOffer())
+                {
+                    sum = orderitems.ProductItem.ProductOffer!.OfferPrice * orderitems.QuantityOfItem;
+                }
+                else
+                {
+                    sum = orderitems.ProductItem.Price * orderitems.QuantityOfItem;
+                }
+
+                return sum;
+            });
+
         }
 
         /// <summary>
@@ -241,8 +254,7 @@ namespace MyOnlineStore.Application.Presentation.Managers
 
             // TODO: Calculate price with offers price
             //Update Product Item Total Price
-            productItemPresenter.TotalPriceOfSelectedItems = 
-                productItemPresenter.Price * productItemPresenter.SelectedItemCount;
+            productItemPresenter.TotalPriceOfSelectedItems = (float)productItemPresenter.Price * productItemPresenter.SelectedItemCount;
         }
 
         /// <summary>

@@ -508,10 +508,9 @@
                     Id = Guid.NewGuid(),
                     MyProductId = SelectedProduct.Id,
                     BuyQuantity = BuyQuantity,
-                    TotalPrice = TotalPrice,
+                    OfferPrice = TotalPrice,
                     StartDate = OfferDate.StartDate,
                     EndDate = OfferDate.EndDate,
-                    BuyOne = PriceByOne,
                     Percent = ItemPercent,
                     StoreId=Guid.Parse(StoreID)
                     

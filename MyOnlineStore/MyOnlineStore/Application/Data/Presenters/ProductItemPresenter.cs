@@ -19,7 +19,7 @@ namespace MyOnlineStore.Application.Data.Presenters
 
         public string Description { get; set; } = string.Empty;
 
-        public float Price { get; set; } = 0.0f;
+        public double Price { get; set; } = 0.0;
 
         public byte[]? Logo { get; set; }
 
@@ -40,7 +40,17 @@ namespace MyOnlineStore.Application.Data.Presenters
         public Guid StoreId { get; set; }
 
         public Offer ProductOffer { get; set; }
-                
+
+        public bool hasoffer { get; set; }
+        public bool HasOffer
+        { get => hasoffer;
+            set {
+
+                hasoffer = value;
+
+                RaisePropertyChanged(() => HasOffer);
+            } }
+
         public ProductItemPresenter()
         {
 
@@ -90,6 +100,7 @@ namespace MyOnlineStore.Application.Data.Presenters
             StoreId = product.MyStoreId;
             SelectedItemCount = selectQuantity;
             TotalPriceOfSelectedItems = totalprice;
+            HasOffer = product.HasOffer();
         }
 
 
@@ -103,6 +114,7 @@ namespace MyOnlineStore.Application.Data.Presenters
             Quantity = product.Quantity;
             Category = product.Category;
             StoreId = product.MyStoreId;
+            HasOffer = product.HasOffer();
            
         }
 

@@ -24,6 +24,7 @@ namespace MyOnlineStore.MobileAppService.Repositories
         public IEnumerable<ProductItem> GetInventoryForStore(Guid storeId)
         {
             var result = _Context.ProductItems
+                .Include(o => o.ProductOffer)
                 .Where(pi => pi.MyStoreId == storeId).ToList();
             
 
@@ -41,7 +42,7 @@ namespace MyOnlineStore.MobileAppService.Repositories
 
         public IEnumerable<Offer> GetOfferOfStore(string storeId)
         {
-            var items = _Context.StoreOffers.Where(offer => offer.StoreId.ToString() == storeId).ToList();
+            var items = _Context.Offers.Where(offer => offer.StoreId.ToString() == storeId).ToList();
 
             return items;
         }
@@ -53,9 +54,9 @@ namespace MyOnlineStore.MobileAppService.Repositories
 
         public bool InsertProductOffer(Offer storeOffer)
         {
-           if(_Context.StoreOffers.Where(o=>o.Id==storeOffer.Id).ToList().Count == 0)
+           if(_Context.Offers.Where(o=>o.Id==storeOffer.Id).ToList().Count == 0)
             {
-                _Context.StoreOffers.Add(storeOffer);
+                _Context.Offers.Add(storeOffer);
                 return Save();
             }
            else
@@ -66,7 +67,7 @@ namespace MyOnlineStore.MobileAppService.Repositories
 
         public bool ProductHasOffer(string productId,string storeId)
         {          
-                if(_Context.StoreOffers.Where(o => o.MyProductId.ToString() == productId && o.StoreId.ToString() == storeId).FirstOrDefault() == null)
+                if(_Context.Offers.Where(o => o.MyProductId.ToString() == productId && o.StoreId.ToString() == storeId).FirstOrDefault() == null)
                 {
                     return false;
                 }
@@ -79,9 +80,9 @@ namespace MyOnlineStore.MobileAppService.Repositories
         public bool RemoveOffert(Offer offer)
         {
            
-            if(_Context.StoreOffers.Contains(offer))
+            if(_Context.Offers.Contains(offer))
             {
-                _Context.StoreOffers.Remove(offer);
+                _Context.Offers.Remove(offer);
                 return Save();
             }
             else

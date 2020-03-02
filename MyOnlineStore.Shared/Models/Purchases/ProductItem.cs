@@ -15,7 +15,7 @@ namespace MyOnlineStore.Entities.Models.Purchases
 
         public float Price { get; set; } = 0.0f;
 
-        public double  RealPrice { get; set; }
+        public double RealPrice { get; set; }
 
         public byte[]? Image { get; set; }
 
@@ -25,19 +25,18 @@ namespace MyOnlineStore.Entities.Models.Purchases
 
         public Guid MyStoreId { get; set; }
 
-        public Guid OfferId { get; set; }
-
-        [ForeignKey("OfferId")]
-        public Offer? ProductOffer { get; set; }
-
         //public Guid OfferId { get; set; }
 
-        //public Offer? ProductOffer { get; set; }
-
-
+        public Guid MyOfferId { get; set; }
+        public Offer? ProductOffer { get; set; }
 
         public ProductItem()
         {
+        }
+
+        public bool HasOffer()
+        {
+            return this.ProductOffer is object;
         }
     }
 }

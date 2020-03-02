@@ -218,6 +218,7 @@
                                         Grid.Row="0"
                                         Grid.ColumnSpan="2"
                                         Padding="0"
+                                        BackgroundColor="Accent"
                                         BorderColor="Gray"
                                         CornerRadius="5"
                                         HasShadow="True"

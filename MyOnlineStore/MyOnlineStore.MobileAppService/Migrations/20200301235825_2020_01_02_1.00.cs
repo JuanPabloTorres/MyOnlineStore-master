@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyOnlineStore.MobileAppService.Migrations
 {
-    public partial class _2020_01_03_100 : Migration
+    public partial class _2020_01_02_100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,27 @@ namespace MyOnlineStore.MobileAppService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Offers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    MyProductId = table.Column<Guid>(nullable: false),
+                    StoreId = table.Column<Guid>(nullable: false),
+                    Percent = table.Column<double>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    BuyQuantity = table.Column<int>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false),
+                    BuyOne = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderStatuses",
                 columns: table => new
                 {
@@ -72,27 +93,6 @@ namespace MyOnlineStore.MobileAppService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StoreOffers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    MyProductId = table.Column<Guid>(nullable: false),
-                    StoreId = table.Column<Guid>(nullable: false),
-                    Percent = table.Column<double>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    BuyQuantity = table.Column<int>(nullable: false),
-                    TotalPrice = table.Column<double>(nullable: false),
-                    BuyOne = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StoreOffers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -338,9 +338,9 @@ namespace MyOnlineStore.MobileAppService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductItems_StoreOffers_OfferId",
+                        name: "FK_ProductItems_Offers_OfferId",
                         column: x => x.OfferId,
-                        principalTable: "StoreOffers",
+                        principalTable: "Offers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -500,8 +500,8 @@ namespace MyOnlineStore.MobileAppService.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "IsAlive", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("7f76d5b5-22cc-4630-9443-0b0b0f16ba8b"), "6ab3a912-309f-472c-b499-87694b2eabb0", true, "Admin" },
-                    { new Guid("d0adbaf9-05d3-4bfb-911a-98d11c977c0a"), "31f9390f-b18b-43ef-8843-59b806305ea2", true, "Employee" }
+                    { new Guid("91f3c156-8313-4d37-aadc-7da37ed229b3"), "45f4ce28-2cd5-4b4c-985a-a9adb1f0cac3", true, "Admin" },
+                    { new Guid("56f87f8b-cc8d-4199-8dfd-1d5ac2aff712"), "1092cc0c-d94d-4d87-9a29-3311b688d9b3", true, "Employee" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -669,7 +669,7 @@ namespace MyOnlineStore.MobileAppService.Migrations
                 name: "Stores");
 
             migrationBuilder.DropTable(
-                name: "StoreOffers");
+                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "Locations");

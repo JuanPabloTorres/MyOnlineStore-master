@@ -35,7 +35,7 @@ namespace MyOnlineStore.MobileAppService.Context
         public DbSet<OrderStatus> OrderStatuses { get; private set; }
         public DbSet<CardAccount> CardAccounts { get; private set; }
 
-        public DbSet<Offer> StoreOffers { get; private set; }
+        public DbSet<Offer> Offers { get; private set; }
 
         public DbSet<StoresEmployees> Employees { get; private set; }
 
@@ -241,11 +241,16 @@ namespace MyOnlineStore.MobileAppService.Context
 
 
             //--------------------Offers----------------------
-
+            modelBuilder.Entity<ProductItem>()
+               .HasOne(_ => _.ProductOffer)
+               .WithOne()
+               .HasForeignKey<Offer>(_ => _.MyProductId);
 
             //modelBuilder.Entity<Offer>()
             //    .HasOne(_ => _.Product);
             //   .WithOne(_ => _.Product);
+
+            //modelBuilder.Entity<ProductItem>().HasOne(_ => _.ProductOffer);
         }
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

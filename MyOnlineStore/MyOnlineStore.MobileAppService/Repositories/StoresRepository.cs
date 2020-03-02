@@ -126,6 +126,7 @@ namespace MyOnlineStore.MobileAppService.Repositories
                         .Where(s => s.Id == storeId)
                         .Include(s => s.FeaturedItems)
                         .Include(s => s.ProductItems)
+                            .ThenInclude(_=>_.ProductOffer)
                         .FirstOrDefault();
 
             //var items = _Context.ProductItems

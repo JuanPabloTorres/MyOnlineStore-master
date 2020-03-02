@@ -11,6 +11,6 @@ namespace MyOnlineStore.Application.Common.Interfaces.Factories
     {
         ProductItemPresenter CreateProductBuyPresenter();
         ProductItemPresenter CreateProductBuyPresenter(ProductItemPresenter productPresenter);
-        ProductItemPresenter CreateProductBuyPresenter(ProductItem product, uint selectQuantity = 0, float totalprice = 0.0f);
+        ProductItemPresenter CreateProductBuyPresenterWithOffer(ProductItem product, uint selectQuantity = 0, float totalprice = 0.0f);
     }
 }

@@ -174,7 +174,7 @@ namespace MyOnlineStore.Application.Presentation.ViewModels.StoresScenarios
             if (ShoppingManager.CurrentShoppingStore.Logo is byte[] logo)
             {
                 StoreLogo = logo;
-                //FeaturedItems.Insert(0, new StoreFeaturedItem { Image = logo });
+                FeaturedItems.Insert(0, new StoreFeaturedItem { Image = logo });
 
 
                 Guid storeidguid = Guid.Parse(StoreId);
